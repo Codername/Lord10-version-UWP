@@ -16,6 +16,7 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using Windows.Foundation.Metadata;
 using Lord10.Controls;
+using Lord10.Forms;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
@@ -46,7 +47,7 @@ namespace Lord10
                 {
                     Symbol = Symbol.Favorite,
                     Label = "Drill In Page",
-                    DestPage = null // typeof(DrillInPage)
+                    DestPage = typeof(About)
                 },
 
 
