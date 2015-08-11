@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Windows.System;
+using Windows.UI;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -96,12 +97,18 @@ namespace Lord10.Controls
                 if (i != index)
                 {
                     lvi.IsSelected = false;
+                    lvi.Background = new SolidColorBrush(Color.FromArgb(100,43,43,43));
+                    lvi.Foreground = new SolidColorBrush(Colors.White);
                 }
                 else if (i == index)
                 {
                     lvi.IsSelected = true;
+                    lvi.Background = new SolidColorBrush(Color.FromArgb(100, 216, 22, 22));
+                    lvi.Foreground = new SolidColorBrush(Colors.White); ;
                 }
             }
+
+
         }
 
         /// <summary>
@@ -116,7 +123,7 @@ namespace Lord10.Controls
         /// <param name="e"></param>
         protected override void OnKeyDown(KeyRoutedEventArgs e)
         {
-        var focusedItem = FocusManager.GetFocusedElement();
+            var focusedItem = FocusManager.GetFocusedElement();
 
             switch (e.Key)
             {
@@ -254,5 +261,7 @@ namespace Lord10.Controls
                 this.ItemsPanelRoot.SetValue(FrameworkElement.HorizontalAlignmentProperty, HorizontalAlignment.Left);
             }
         }
-    }
+
+
+    }              
 }

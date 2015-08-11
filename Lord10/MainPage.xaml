@@ -71,7 +71,8 @@
                                           ContainerContentChanging="NavMenuItemContainerContentChanging"
                                           ItemContainerStyle="{StaticResource NavMenuItemContainerStyle}"
                                           ItemTemplate="{StaticResource NavMenuItemTemplate}"
-                                          ItemInvoked="NavMenuList_ItemInvoked">
+                                          ItemInvoked="NavMenuList_ItemInvoked"
+                                          Background="#FF2B2B2B">
                     <controls:NavMenuListView.Header>
                         <!-- Using this custom back navigation button until the system-provided back button is enabled. -->
                         <Button x:Name="BackButton"

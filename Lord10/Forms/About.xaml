@@ -15,13 +15,13 @@
 
     <Grid>
         <Grid.Background>
-            <ImageBrush Stretch="Fill" ImageSource="Assets/About.png"/>
+            <ImageBrush Stretch="Fill" ImageSource="ms-appx:///Assets/About.png"/>
         </Grid.Background>
         <Hub>
             <HubSection>
                 <DataTemplate>
                     <Grid>
-                        <Image HorizontalAlignment="Left" Height="139" Margin="21,199,0,0" VerticalAlignment="Top" Width="310" RenderTransformOrigin="0.421,-0.275" Source="Assets/Logo Final.png"/>
+                        <Image HorizontalAlignment="Left" Height="139" Margin="21,199,0,0" VerticalAlignment="Top" Width="310" RenderTransformOrigin="0.421,-0.275" Source="ms-appx:///Assets/Result 4.png"/>
                         <TextBlock HorizontalAlignment="Center" Margin="36,364,44,0" TextWrapping="Wrap" Text="Por. Evandro S. Figueirôa" Height="51" Width="261" Foreground="#FF060606" FontSize="18" FontWeight="Bold" VerticalAlignment="Top" TextAlignment="Center" />
                     </Grid>
                 </DataTemplate>

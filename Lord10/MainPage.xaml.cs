@@ -45,8 +45,8 @@ namespace Lord10
                 },
                 new NavMenuItem()
                 {
-                    Symbol = Symbol.Favorite,
-                    Label = "Drill In Page",
+                    Symbol = Symbol.Help,
+                    Label = "Sobre...",
                     DestPage = typeof(About)
                 },
 

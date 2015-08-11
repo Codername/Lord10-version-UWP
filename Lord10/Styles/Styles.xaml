@@ -14,7 +14,7 @@
         <Setter Property="VerticalAlignment" Value="Top" />
         <Setter Property="HorizontalContentAlignment" Value="Center" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
-        <Setter Property="Background" Value="#FFC30C0C" />
+        <Setter Property="Background" Value="#FFD81616" />
         <Setter Property="Foreground" Value="White" />
         <Setter Property="Content" Value="&#xE700;" />
         <Setter Property="AutomationProperties.Name" Value="Menu" />
@@ -129,6 +129,7 @@
         <Setter Property="MinWidth" Value="{StaticResource SplitViewCompactPaneThemeLength}"/>
         <Setter Property="Height" Value="48"/>
         <Setter Property="Padding" Value="0"/>
-    </Style>
+        <Setter Property="Foreground" Value="White"/>
+     </Style>
 
 </ResourceDictionary>
