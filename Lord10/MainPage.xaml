@@ -111,13 +111,11 @@
                       Unchecked="TogglePaneButton_Checked"
                       AutomationProperties.Name="Menu"
                       ToolTipService.ToolTip="Menu" />
+    
     </Grid>
+  
 
-
-
-
-
-<!--
+    <!--
     <Page
     x:Class="Lord10.MainPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"

@@ -2,37 +2,55 @@
     x:Class="Lord10.Forms.About"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:App1"
+    xmlns:local="using:Lord10"
+    xmlns:c="using:Lord10.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" ManipulationMode="None">
+    mc:Ignorable="d">
     <Page.BottomAppBar>
-        <CommandBar>
+        <CommandBar RequestedTheme="Dark">
             <AppBarButton Icon="Accept" Click="AppBarButton_Click" />
         </CommandBar>
-    </Page.BottomAppBar>
-
+      </Page.BottomAppBar>
     <Grid>
-        <Grid.Background>
-            <ImageBrush Stretch="Fill" ImageSource="ms-appx:///Assets/About.png"/>
-        </Grid.Background>
-        <Hub>
-            <HubSection>
-                <DataTemplate>
+             <Grid.Background>
+                <ImageBrush Stretch="Fill" ImageSource="ms-appx:///Assets/About.png"/>
+            </Grid.Background>
+            <c:PageHeader x:Name="pageHeader">
+            <c:PageHeader.HeaderContent>
+                <TextBlock x:Name="title" Style="{ThemeResource PageTitleTextBlockStyle}" Text="About..."/>
+            </c:PageHeader.HeaderContent>
+        </c:PageHeader>
+        <Hub Margin="0,48,0,0">
+            <HubSection VerticalContentAlignment="Stretch">
+                 <DataTemplate>
                     <Grid>
-                        <Image HorizontalAlignment="Left" Height="139" Margin="21,199,0,0" VerticalAlignment="Top" Width="310" RenderTransformOrigin="0.421,-0.275" Source="ms-appx:///Assets/Result 4.png"/>
-                        <TextBlock HorizontalAlignment="Center" Margin="36,364,44,0" TextWrapping="Wrap" Text="Por. Evandro S. Figueirôa" Height="51" Width="261" Foreground="#FF060606" FontSize="18" FontWeight="Bold" VerticalAlignment="Top" TextAlignment="Center" />
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="2*"/>
+                            <RowDefinition Height="1*"/>
+                            <RowDefinition Height="2*"/>
+                        </Grid.RowDefinitions>
+                        <Image  Grid.Row="1"  Height="139" Margin="0,0,0,0" VerticalAlignment="Center" Width="310" RenderTransformOrigin="0.421,-0.275" Source="ms-appx:///Assets/Result 4.png"/>
+                        <TextBlock Grid.Row="2" HorizontalAlignment="Center" Margin="0,0,0,0" TextWrapping="Wrap" Text="Por. Evandro S. Figueirôa"  Width="261" Foreground="#FF060606" FontSize="18" FontWeight="Bold" VerticalAlignment="Center" TextAlignment="Center" />
                     </Grid>
                 </DataTemplate>
             </HubSection>
-            <HubSection >
+            <HubSection VerticalContentAlignment="Stretch" >
                 <DataTemplate>
                     <Grid>
-                        <Image HorizontalAlignment="Left" Height="36" Margin="21,250,0,0" VerticalAlignment="Top" Width="310" Source="Assets/1982669.png"/>
-                        <Image HorizontalAlignment="Left" Height="36" Margin="180,149,0,0" VerticalAlignment="Top" Width="120" Source="Assets/lejosLogo.jpg"/>
-                        <Image HorizontalAlignment="Left" Height="36" Margin="21,149,0,0" VerticalAlignment="Top" Width="310" Source="Assets/1984247.jpg"/>
-                        <TextBlock HorizontalAlignment="Center" Margin="36,364,44,0" TextWrapping="Wrap" Text="LEGO, the LEGO logo, MINDSTORMS and the MINDSTORMS logo are trademarks of the/sont des marques de commerce de/son marcas registradas de LEGO Group. ©2014 The LEGO Group. " Height="51" Width="261" Foreground="#FF060606" FontSize="10" FontWeight="Bold" VerticalAlignment="Top" TextAlignment="Center" />
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="1*"/>
+                            <RowDefinition Height="1*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="1*"/>
+                            <RowDefinition Height="2*"/>
+                            <RowDefinition Height="2*"/>
+                        </Grid.RowDefinitions>
+                        <Image Grid.Row="3" HorizontalAlignment="center" Height="36" VerticalAlignment="Center" Width="310" Source="ms-appx:///Assets/1982669.png"/>
+                        <Image Grid.Row="1" HorizontalAlignment="Right" Height="36" Margin="0,0,5,0" VerticalAlignment="Center" Width="120" Source="ms-appx:///Assets/lejosLogo.jpg"/>
+                        <Image Grid.Row="1" HorizontalAlignment="Left" Height="36" Margin="10,0,0,0" VerticalAlignment="Center" Width="310" Source="ms-appx:///Assets/1984247.jpg"/>
+                        <TextBlock Grid.Row="4" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,0" TextWrapping="Wrap" Text="LEGO, the LEGO logo, MINDSTORMS and the MINDSTORMS logo are trademarks of the/sont des marques de commerce de/son marcas registradas de LEGO Group. ©2014 The LEGO Group. " Height="51" Width="261" Foreground="#FF060606" FontSize="10" FontWeight="Bold"  TextAlignment="Center" />
                     </Grid>
                 </DataTemplate>
             </HubSection>

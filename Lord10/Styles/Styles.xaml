@@ -132,4 +132,9 @@
         <Setter Property="Foreground" Value="White"/>
      </Style>
 
+    <ImageBrush x:Key="AppBackgroundLego" ImageSource="ms-appx:///Assets/Half Back.png" Stretch="UniformToFill" />
+    <Style x:Key="GridBKLegoStyle" TargetType="Grid">
+        <Setter Property="Background" Value="{StaticResource AppBackgroundLego}" />
+    </Style>
+
 </ResourceDictionary>

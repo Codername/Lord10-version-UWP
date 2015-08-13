@@ -103,8 +103,11 @@
     <Compile Include="Forms\About.xaml.cs">
       <DependentUpon>About.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Forms\TesteForm.xaml.cs">
-      <DependentUpon>TesteForm.xaml</DependentUpon>
+    <Compile Include="Forms\ConfigForm.xaml.cs">
+      <DependentUpon>ConfigForm.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\MainForm.xaml.cs">
+      <DependentUpon>MainForm.xaml</DependentUpon>
     </Compile>
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
@@ -124,6 +127,7 @@
     <Content Include="Assets\About.png" />
     <Content Include="Assets\Esplash II.png" />
     <Content Include="Assets\Esplash.png" />
+    <Content Include="Assets\Half Back.png" />
     <Content Include="Assets\lejosLogo.jpg" />
     <Content Include="Assets\Result 4.png" />
     <Content Include="Assets\StoreLogo.scale-100.png" />
@@ -148,7 +152,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Forms\TesteForm.xaml">
+    <Page Include="Forms\ConfigForm.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Forms\MainForm.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -160,6 +168,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <SDKReference Include="WindowsMobile, Version=10.0.10240.0">
+      <Name>Windows Mobile Extensions for the UWP</Name>
+    </SDKReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>

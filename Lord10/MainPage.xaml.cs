@@ -39,9 +39,9 @@ namespace Lord10
                 },
                 new NavMenuItem()
                 {
-                    Symbol = Symbol.Edit,
-                    Label = "CommandBar Page",
-                    DestPage = null //typeof(CommandBarPage)
+                    Symbol = Symbol.Setting,
+                    Label = "Configurações...",
+                    DestPage = typeof(ConfigForm)
                 },
                 new NavMenuItem()
                 {
