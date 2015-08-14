@@ -23,6 +23,19 @@
         </c:PageHeader>
         <Hub Margin="0,48,0,0">
             <HubSection VerticalContentAlignment="Stretch">
+                <DataTemplate>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="2*"/>
+                        </Grid.RowDefinitions>
+                        <Image  Grid.Row="1"  Height="139" Margin="0,0,0,0" VerticalAlignment="Center" Width="310" RenderTransformOrigin="0.421,-0.275" Source="ms-appx:///Assets/Logo App About.png"/>
+                        
+                    </Grid>
+                </DataTemplate>
+            </HubSection>
+            <HubSection VerticalContentAlignment="Stretch">
                  <DataTemplate>
                     <Grid>
                         <Grid.RowDefinitions>

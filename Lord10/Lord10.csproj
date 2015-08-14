@@ -12,7 +12,7 @@
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
     <TargetPlatformVersion>10.0.10240.0</TargetPlatformVersion>
-    <TargetPlatformMinVersion>10.0.10162.0</TargetPlatformMinVersion>
+    <TargetPlatformMinVersion>10.0.10240.0</TargetPlatformMinVersion>
     <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
     <EnableDotNetNativeCompatibleProfile>true</EnableDotNetNativeCompatibleProfile>
     <FileAlignment>512</FileAlignment>
@@ -103,6 +103,9 @@
     <Compile Include="Forms\About.xaml.cs">
       <DependentUpon>About.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Conect Diag.xaml.cs">
+      <DependentUpon>Conect Diag.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Forms\ConfigForm.xaml.cs">
       <DependentUpon>ConfigForm.xaml</DependentUpon>
     </Compile>
@@ -129,7 +132,9 @@
     <Content Include="Assets\Esplash.png" />
     <Content Include="Assets\Half Back.png" />
     <Content Include="Assets\lejosLogo.jpg" />
+    <Content Include="Assets\Logo App About.png" />
     <Content Include="Assets\Result 4.png" />
+    <Content Include="Assets\SplashII.png" />
     <Content Include="Assets\StoreLogo.scale-100.png" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
@@ -149,6 +154,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Forms\About.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Forms\Conect Diag.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

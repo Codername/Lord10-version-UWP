@@ -1,0 +1,23 @@
+﻿<ContentDialog
+    x:Class="Lord10.Forms.Conect_Diag"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Lord10.Forms"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Title="Conectando..."
+    
+    PrimaryButtonText="Ok"
+    SecondaryButtonText="Cancelar"
+    PrimaryButtonClick="ContentDialog_PrimaryButtonClick"
+    SecondaryButtonClick="ContentDialog_SecondaryButtonClick" RequestedTheme="Dark" HorizontalAlignment="Center" VerticalAlignment="Center"  Height="255" Width="235">
+    
+    <StackPanel VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+        <TextBlock x:Name="Label_Status" Margin="2,2,0,0" Text=""/>
+
+        <ProgressRing HorizontalAlignment="Center" Margin="0,15,0,8" VerticalAlignment="Center" Width="80" Height="80" IsActive="True"/>
+        
+      </StackPanel>
+
+</ContentDialog>
