@@ -22,8 +22,14 @@ namespace Lord10
     /// <summary>
     /// Provides application-specific behavior to supplement the default Application class.
     /// </summary>
+    ///  
+
     sealed partial class App : Application
     {
+
+        RobotFlag FLAG;
+        RobotLag LAG;
+
         /// <summary>
         /// Initializes the singleton application object.  This is the first line of authored code
         /// executed, and as such is the logical equivalent of main() or WinMain().
@@ -55,58 +61,11 @@ namespace Lord10
                 statusBar.BackgroundColor = Windows.UI.Colors.Black;// Atribui Cor a Barra de Estatus
                 statusBar.BackgroundOpacity = 1;
                 statusBar.HideAsync();
-
             }
 
-            /****                                 ############################################
-
+            FLAG = new Lord10.RobotFlag();
+            LAG = new Lord10.RobotLag();
     
-       Bloco  Original
-    
-    ############################################################################################################################################
-
-
-            Frame rootFrame = Window.Current.Content as Frame;
-
-            // Do not repeat app initialization when the Window already has content,
-            // just ensure that the window is active
-            if (rootFrame == null)
-            {
-                // Create a Frame to act as the navigation context and navigate to the first page
-                rootFrame = new Frame();
-
-                rootFrame.NavigationFailed += OnNavigationFailed;
-
-                if (e.PreviousExecutionState == ApplicationExecutionState.Terminated)
-                {
-                    //TODO: Load state from previously suspended application
-                }
-
-                // Place the frame in the current Window
-                Window.Current.Content = rootFrame;
-            }
-
-            if (rootFrame.Content == null)
-            {
-                // When the navigation stack isn't restored navigate to the first page,
-                // configuring the new page by passing required information as a navigation
-                // parameter
-
-                // rootFrame.Navigate(typeof(MainPage), e.Arguments);
-                rootFrame.AppFrame.Navigate(typeof(MainForm), e.Arguments, new Windows.UI.Xaml.Media.Animation.SuppressNavigationTransitionInfo());
-            }
-            // Ensure the current window is active
-            Window.Current.Activate();
-
-
-
-
-   #################################################################################################################################################################
-
-    Fim do Bloco Original
-
-  
-    #################################################################################################################################################################*/
 
             MainPage shell = Window.Current.Content as MainPage;
 
@@ -125,6 +84,7 @@ namespace Lord10
                 if (e.PreviousExecutionState == ApplicationExecutionState.Terminated)
                 {
                     //TODO: Load state from previously suspended application
+                //    Lord10.Forms.ConfigForm.
                 }
             }
 
@@ -161,6 +121,7 @@ namespace Lord10
         {
             var deferral = e.SuspendingOperation.GetDeferral();
             //TODO: Save application state and stop any background activity
+
             deferral.Complete();
         }
     }

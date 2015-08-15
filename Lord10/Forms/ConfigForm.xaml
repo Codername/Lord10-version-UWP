@@ -1,0 +1,45 @@
+﻿<Page
+    x:Class="Lord10.Forms.ConfigForm"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Lord10.Forms"
+    xmlns:c="using:Lord10.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d" Loaded="Page_Loaded" Unloaded="Page_Unloaded">
+    <Page.BottomAppBar>
+        <CommandBar RequestedTheme="Dark">
+            <AppBarButton Icon="Cancel" Click="Cancel" />
+            <AppBarButton Icon="Accept" Click="Accept" />
+        </CommandBar>
+    </Page.BottomAppBar>
+    <Grid Background="{ThemeResource AppBackgroundLego}">
+        <Grid Background="#C4000000" >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="2*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="5*"/>
+            </Grid.RowDefinitions>
+            <TextBox x:Name="cTextLag" Grid.Row="2"  HorizontalAlignment="Left" Margin="52,0,0,0" TextWrapping="Wrap" Text="192.168.100.100" VerticalAlignment="Center" Width="250" IsEnabled="{Binding TextStatusLag}" InputScope="Number" />
+            <TextBlock Grid.Row="2" HorizontalAlignment="Left" Margin="8,0,0,0" TextWrapping="Wrap" Text="IP" VerticalAlignment="Center" FontSize="18" FontWeight="Bold" Foreground="White"  />
+
+            <TextBlock Grid.Row="4" HorizontalAlignment="Left" Margin="8,0,0,0" TextWrapping="Wrap" Text="IP" VerticalAlignment="Center" FontSize="18" FontWeight="Bold" Foreground="White" />
+            <TextBox x:Name="cTextFlag" Grid.Row="4" HorizontalAlignment="Left" Margin="52,0,0,0" TextWrapping="Wrap" Text="192.168.200.200" VerticalAlignment="Center" Width="250" IsEnabled="{Binding TextStatusFlag}" InputScope="Number"/>
+
+            <ToggleSwitch x:Name="cCheckIPFlag" Grid.Row="3"  OnContent="Robô Flag Habilitado" OffContent="Robô Flag Desabilitado"  HorizontalAlignment="Left" Margin="15,0,0,0" VerticalAlignment="Center"  RequestedTheme="Dark" />
+            <ToggleSwitch x:Name="cCheckIPLag" Grid.Row="1" OnContent="Robô Lag Habilitado" OffContent="Robô Lag Desabilitado" HorizontalAlignment="Left" Margin="15,0,0,0" VerticalAlignment="Center"  RequestedTheme="Dark" />
+
+
+            <!-- <ToggleButton x:Name="cCheckIPFlag" Grid.Row="3" Content="Habilita Robô Flag" HorizontalAlignment="Left" Margin="15,0,0,0" VerticalAlignment="Center" IsChecked="{Binding ChkFlag, Mode=TwoWay}" Foreground="White"/>
+             -->
+        </Grid>
+        <c:PageHeader x:Name="pageHeader">
+            <c:PageHeader.HeaderContent>
+                <TextBlock x:Name="title" Style="{ThemeResource PageTitleTextBlockStyle}" Text="Configurações..."/>
+            </c:PageHeader.HeaderContent>
+        </c:PageHeader>
+    </Grid>
+</Page>
