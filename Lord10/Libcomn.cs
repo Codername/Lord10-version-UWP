@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Net;
 using System.Threading.Tasks;
+using System.Diagnostics;
 
 namespace Lord10
 {
@@ -66,8 +67,9 @@ namespace Lord10
 
         public void Store_IP(String parametro, int pos)
         {
-            Object retorno;
-            string str;
+           
+
+
             if (pos == 0)
             {
                 if (parametro == "" || parametro == null)
@@ -77,6 +79,7 @@ namespace Lord10
                 else
                 {
                     LocalSettings.Values["ip_lag"] = parametro;
+                    //Mensagem para Debuger
                 }
 
             }
@@ -226,32 +229,38 @@ namespace Lord10
             this.SetIp(str);
             this.Setstatus(Sts);
         }
-
+        
         ~RobotLag()
+        {
+           
+            Debug.WriteLine("Metodo Destrutor Chamado");
+        }
+
+        public void SaveSettings()
         {
             Bibli.Store_IP(this.RetIp(), 0);
             Bibli.Store_Robot_active(this.Getstatus(), 0);
+            //Mensagem para Debuger
+
         }
 
 
-    }
-
-    
-    
-    /*////////////////////////////////////////////////////////////////////////////////////////////////////////////////////    
+        }
 
 
-        Classe Flag
+        /*////////////////////////////////////////////////////////////////////////////////////////////////////////////////////    
 
 
-
-
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////    */
+            Classe Flag
 
 
 
 
-    public class RobotFlag : Comn
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////    */
+
+
+
+        public class RobotFlag : Comn
     {
         sysutils Bibli;
         string str;
@@ -266,17 +275,15 @@ namespace Lord10
             this.SetIp(str);
             this.Setstatus(Sts);
         }
-
-        ~RobotFlag()
+        public void SaveSettings()
         {
             Bibli.Store_IP(this.RetIp(), 1);
             Bibli.Store_Robot_active(this.Getstatus(), 1);
         }
+
     }
 
-
-
-
+   
 
 
 }

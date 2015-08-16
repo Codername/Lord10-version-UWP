@@ -1,22 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
-using Windows.Foundation.Collections;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Automation;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using Windows.Foundation.Metadata;
 using Lord10.Controls;
 using Lord10.Forms;
+using System.Diagnostics; // Uso do Writeline DEBUG
+
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
@@ -25,12 +20,15 @@ namespace Lord10
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class MainPage : Page
+    public partial class MainPage : Page
     {
-            // Declare the top level nav items
-            private List<NavMenuItem> navlist = new List<NavMenuItem>(
-                new[]
-                {
+        // Declare the top level nav items
+        public RobotLag LAG { get; set; }
+        public RobotFlag FLAG { get; set; }
+
+        private List<NavMenuItem> navlist = new List<NavMenuItem>(
+            new[]
+            {
                 new NavMenuItem()
                 {
                     Symbol = Symbol.Contact,
@@ -51,7 +49,9 @@ namespace Lord10
                 },
 
 
-                });
+            });
+
+           
 
             public static MainPage Current = null;
 
@@ -71,17 +71,34 @@ namespace Lord10
                     this.TogglePaneButton.Focus(FocusState.Programmatic);
                 };
 
-                SystemNavigationManager.GetForCurrentView().BackRequested += SystemNavigationManager_BackRequested;
+                LAG = new RobotLag();
+                FLAG = new RobotFlag();
+
+            SystemNavigationManager.GetForCurrentView().BackRequested += SystemNavigationManager_BackRequested;
 
                 // If on a phone device that has hardware buttons then we hide the app's back button.
                 if (ApiInformation.IsTypePresent("Windows.Phone.UI.Input.HardwareButtons"))
                 {
                     this.BackButton.Visibility = Visibility.Collapsed;
                 }
-
+                                
                 NavMenuList.ItemsSource = navlist;
+            
+            /// inicialização classe robos
+            /// 
+              
+            if (LAG != null)
+                {
+                        ((App)Application.Current).LAG = LAG;
+                }
+                if (FLAG != null)
+                {
+                        ((App)Application.Current).FLAG = FLAG;
+                }
             }
 
+        
+               
             public Frame AppFrame { get { return this.frame; } }
 
             /// <summary>
@@ -176,10 +193,9 @@ namespace Lord10
             private void NavMenuList_ItemInvoked(object sender, ListViewItem listViewItem)
             {
                 var item = (NavMenuItem)((NavMenuListView)sender).ItemFromContainer(listViewItem);
-
-                if (item != null)
+            if (item != null)
                 {
-                    if (item.DestPage != null &&
+                if (item.DestPage != null &&
                         item.DestPage != this.AppFrame.CurrentSourcePageType)
                     {
                         this.AppFrame.Navigate(item.DestPage, item.Arguments);

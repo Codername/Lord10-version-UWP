@@ -6,7 +6,7 @@
     xmlns:c="using:Lord10.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d" Loaded="Page_Loaded" Unloaded="Page_Unloaded">
+    mc:Ignorable="d">
     <Page.BottomAppBar>
         <CommandBar RequestedTheme="Dark">
             <AppBarButton Icon="Cancel" Click="Cancel" />
@@ -29,8 +29,8 @@
             <TextBlock Grid.Row="4" HorizontalAlignment="Left" Margin="8,0,0,0" TextWrapping="Wrap" Text="IP" VerticalAlignment="Center" FontSize="18" FontWeight="Bold" Foreground="White" />
             <TextBox x:Name="cTextFlag" Grid.Row="4" HorizontalAlignment="Left" Margin="52,0,0,0" TextWrapping="Wrap" Text="192.168.200.200" VerticalAlignment="Center" Width="250" IsEnabled="{Binding TextStatusFlag}" InputScope="Number"/>
 
-            <ToggleSwitch x:Name="cCheckIPFlag" Grid.Row="3"  OnContent="Robô Flag Habilitado" OffContent="Robô Flag Desabilitado"  HorizontalAlignment="Left" Margin="15,0,0,0" VerticalAlignment="Center"  RequestedTheme="Dark" />
-            <ToggleSwitch x:Name="cCheckIPLag" Grid.Row="1" OnContent="Robô Lag Habilitado" OffContent="Robô Lag Desabilitado" HorizontalAlignment="Left" Margin="15,0,0,0" VerticalAlignment="Center"  RequestedTheme="Dark" />
+            <ToggleSwitch x:Name="cCheckIPFlag" Grid.Row="3"  OnContent="Robô Flag Habilitado" OffContent="Robô Flag Desabilitado"  HorizontalAlignment="Left" Margin="15,0,0,0" VerticalAlignment="Center"  RequestedTheme="Dark" Toggled="cCheckIPFlag_Toggled_1" />
+            <ToggleSwitch x:Name="cCheckIPLag" Grid.Row="1" OnContent="Robô Lag Habilitado" OffContent="Robô Lag Desabilitado" HorizontalAlignment="Left" Margin="15,0,0,0" VerticalAlignment="Center"  RequestedTheme="Dark" Toggled="cCheckIPLag_Toggled" />
 
 
             <!-- <ToggleButton x:Name="cCheckIPFlag" Grid.Row="3" Content="Habilita Robô Flag" HorizontalAlignment="Left" Margin="15,0,0,0" VerticalAlignment="Center" IsChecked="{Binding ChkFlag, Mode=TwoWay}" Foreground="White"/>

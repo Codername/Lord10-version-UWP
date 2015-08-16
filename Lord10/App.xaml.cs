@@ -23,12 +23,37 @@ namespace Lord10
     /// Provides application-specific behavior to supplement the default Application class.
     /// </summary>
     ///  
+    
 
-    sealed partial class App : Application
+    partial class App : Application
     {
+        private RobotLag _LAG;
+        private RobotFlag _FLAG;
+        /*        public RobotLag LAG
+                {
+                    get
+                    {
+                        return _LAG;
+                    }
+                    set
+                    {
+                        _LAG = value;
+                    }
+                }
 
-        RobotFlag FLAG;
-        RobotLag LAG;
+                public RobotFlag  FLAG {
+                        get
+                              {
+                            return ( _FLAG );
+                        }
+                        set   {
+                            _FLAG = value;
+                        }
+                    }   
+                    */
+
+        public RobotLag LAG { get; set; }
+        public RobotFlag FLAG { get; set; }
 
         /// <summary>
         /// Initializes the singleton application object.  This is the first line of authored code
@@ -63,12 +88,10 @@ namespace Lord10
                 statusBar.HideAsync();
             }
 
-            FLAG = new Lord10.RobotFlag();
-            LAG = new Lord10.RobotLag();
-    
-
+           
             MainPage shell = Window.Current.Content as MainPage;
 
+            
             // Do not repeat app initialization when the Window already has content,
             // just ensure that the window is active
             if (shell == null)
@@ -76,6 +99,7 @@ namespace Lord10
                 // Create a AppShell to act as the navigation context and navigate to the first page
                 shell = new MainPage();
 
+               
                 // Set the default language
                 shell.Language = Windows.Globalization.ApplicationLanguages.Languages[0];
 
@@ -90,6 +114,7 @@ namespace Lord10
 
             // Place our app shell in the current Window
             Window.Current.Content = shell;
+          
 
             if (shell.AppFrame.Content == null)
             {
