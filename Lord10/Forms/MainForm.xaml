@@ -10,15 +10,10 @@
   
     <Page.BottomAppBar>
         <CommandBar>
-            <CommandBar.Content>
-                <Grid/>
-            </CommandBar.Content>
             <AppBarButton x:Name="appBarButton" Icon="DisconnectDrive" Label="Desconectar" Visibility="Collapsed"/>
-            <AppBarButton  Label="Sinqy Mindstorms" Icon="Sync" Click="AppBarButton_Sync">
-                <ContentPresenter Height="100" Width="100"/>
-            </AppBarButton>
-            
+            <AppBarButton  Label="Sync Mindstorms" Icon="Sync" Click="AppBarButton_Sync" />
         </CommandBar>
+        
     </Page.BottomAppBar>
     <Grid Style="{ThemeResource GridBKLegoStyle}">
         <c:PageHeader x:Name="pageHeader">
@@ -27,9 +22,7 @@
             </c:PageHeader.HeaderContent>
         </c:PageHeader>
         
-               
-
-        <Hub>
+        <Hub Margin="0,48,0,0">
             <HubSection VerticalContentAlignment="Stretch">
                 <DataTemplate>
                     <Grid Margin="-4,-71,3.833,0">
@@ -99,18 +92,22 @@
             </HubSection>
             <HubSection VerticalContentAlignment="Stretch">
                 <DataTemplate>
-                    <Grid Margin="-4,-71,3.833,0">
+                    <Grid>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="12*"/>
-                            <RowDefinition Height="2*"/>
                             <RowDefinition Height="*"/>
+                            <RowDefinition Height="13*"/>
+                            <RowDefinition Height="2*"/>
+                            <RowDefinition Height="2*"/>
                         </Grid.RowDefinitions>
-                        <ListView x:Name="cLogView"  Grid.Row="0" HorizontalAlignment="Center" Height="350"  VerticalAlignment="Center" Width="300" RenderTransformOrigin="0.52,0.59" Background="#33000000" />
-                        <Button Content="Limpar" Grid.Row="1" HorizontalAlignment="Left" Margin="35,0,0,0" VerticalAlignment="Top" Background="#33060606" Grid.RowSpan="2"/>
-                        <Button Content="Salvar..." Grid.Row="1" HorizontalAlignment="Right" Margin="0,0,35,0" VerticalAlignment="Top" Background="#330F0F0F" Grid.RowSpan="2"/>
+                        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Visible" MaxHeight="350" Background="#693A3434">
+                            <TextBlock x:Name="cLogView"  HorizontalAlignment="Center" Height="350"  VerticalAlignment="Center" Width="300" Margin="10,20,10,0"  />
+                        </ScrollViewer>
+                        <!--  <ListView x:Name="cLogView"  Grid.Row="1" HorizontalAlignment="Center" Height="350"  VerticalAlignment="Center" Width="300" RenderTransformOrigin="0.52,0.59" Background="#33000000" BorderBrush="White" />      -->
+                        <Button x:Name="cLimpBt" Content="Limpar" Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="35,0,0,0"  Foreground="White" Background="#33060606"  BorderThickness="2" BorderBrush="#FFFFFFFF" Click="cLimpBt_Click"/>
+                        <Button Content="Salvar..." Grid.Row="2" HorizontalAlignment="Right" Margin="0,0,35,0" VerticalAlignment="Center" Foreground="White" Background="#33060606"  BorderThickness="2" BorderBrush="#FFFFFFFF"/>
                     </Grid>
                 </DataTemplate>
-            </HubSection>
+           </HubSection>
         </Hub>
     </Grid>
 </Page>

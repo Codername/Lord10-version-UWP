@@ -51,5 +51,10 @@ namespace Lord10.Forms
 
 
         }
+
+        private void cLimpBt_Click(object sender, RoutedEventArgs e)
+        {
+            //
+        }
     }
 }
