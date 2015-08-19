@@ -31,9 +31,9 @@ namespace Lord10
             {
                 new NavMenuItem()
                 {
-                    Symbol = Symbol.Contact,
-                    Label = "Basic Page",
-                    DestPage = null //typeof(BasicPage)
+                    Symbol = Symbol.FourBars,
+                    Label = "Painel de Controle",
+                    DestPage = typeof(MainForm) //typeof(BasicPage)
                 },
                 new NavMenuItem()
                 {
