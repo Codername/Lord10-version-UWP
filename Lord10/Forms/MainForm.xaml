@@ -7,13 +7,25 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
-  
+
+    <Page.Resources>
+        <Storyboard x:Name="spinButton">
+            <DoubleAnimation To="360" RepeatBehavior="Forever" 
+         Storyboard.TargetName="AppBarConnect"
+         Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.Rotation)" />
+        </Storyboard>
+    </Page.Resources>
+
     <Page.BottomAppBar>
         <CommandBar>
             <AppBarButton x:Name="appBarButton" Icon="DisconnectDrive" Label="Desconectar" Visibility="Collapsed"/>
-            <AppBarButton  Label="Sync Mindstorms" Icon="Sync" Click="AppBarButton_Sync" />
+            <AppBarButton x:Name="AppBarConnect" Label="Sync Mindstorms" Icon="Sync" Click="AppBarButton_Sync" RenderTransformOrigin="0.5,0.5" >
+                <AppBarButton.RenderTransform>
+                    <CompositeTransform/>
+                </AppBarButton.RenderTransform>
+            </AppBarButton>
         </CommandBar>
-        
+
     </Page.BottomAppBar>
     <Grid Style="{ThemeResource GridBKLegoStyle}">
         <c:PageHeader x:Name="pageHeader">
@@ -21,11 +33,11 @@
                 <TextBlock x:Name="title" Style="{ThemeResource PageTitleTextBlockStyle}" Text="Lord Nelson Robot Control"/>
             </c:PageHeader.HeaderContent>
         </c:PageHeader>
-        
+
         <Hub Margin="0,48,0,0">
-            <HubSection VerticalContentAlignment="Stretch">
+            <HubSection VerticalContentAlignment="Stretch" HorizontalAlignment="Stretch" Width="357">
                 <DataTemplate>
-                    <Grid Margin="-4,-71,3.833,0">
+                    <Grid  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="349">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*"/>
                             <RowDefinition Height="12*"/>
@@ -50,32 +62,35 @@
                                 </LinearGradientBrush>
                             </Rectangle.Fill>
                         </Rectangle>
-                        <Button x:Name="ButtonStop" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center"  VerticalAlignment="Center" Height="110"  Width="110" >
-                            <Image Source="Assets/Stop.png" Stretch="Fill" Margin="0,5,0,0"/>
+                        <Button x:Name="ButtonStop" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center"  VerticalAlignment="Center" Height="110"  Width="110"
+                                 Foreground="White" BorderThickness="2" BorderBrush="#FFFFFFFF">
+                            <Button.Background>
+                                <ImageBrush Stretch="Uniform" ImageSource="ms-appx:///Assets/Stop.png"/>
+                            </Button.Background>
                         </Button>
-                        <Button x:Name="ButtonFront" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center"  VerticalAlignment="Center" Height="40"  Width="200" Margin="0,-190,0,0" >
-                            <Image Source="Assets/Arrow.png" Stretch="Fill" />
+                        <Button x:Name="ButtonFront" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center"  VerticalAlignment="Center" Height="40"  Width="200" Margin="0,-190,0,0"  Foreground="White" BorderThickness="1" BorderBrush="#FFFFFFFF" >
+                            <Image Source="ms-appx:///Assets/Arrow.png" Stretch="Fill" />
                         </Button>
-                        <Button x:Name="ButtonRear" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center"  VerticalAlignment="Center" Height="40"  Width="200" Margin="0,190,0,0" >
+                        <Button x:Name="ButtonRear" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center"  VerticalAlignment="Center" Height="40"  Width="200" Margin="0,190,0,0"  Foreground="White" BorderThickness="1" BorderBrush="#FFFFFFFF" >
                             <Button.Projection>
                                 <PlaneProjection RotationX="180"/>
                             </Button.Projection>
-                            <Image Source="Assets/Arrow.png" Stretch="Fill" />
+                            <Image Source="ms-appx:///Assets/Arrow.png" Stretch="Fill" />
                         </Button>
-                        <Button x:Name="ButtonRight" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Right"  VerticalAlignment="Center" Height="50"  Width="110" Margin="0,0,0,0" RenderTransformOrigin="0.5,0.5" >
+                        <Button x:Name="ButtonRight" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Right"  VerticalAlignment="Center" Height="50"  Width="110" Margin="0,0,0,0" RenderTransformOrigin="0.5,0.5"  Foreground="White" BorderThickness="1" BorderBrush="#FFFFFFFF" >
                             <Button.RenderTransform>
                                 <CompositeTransform Rotation="90"/>
                             </Button.RenderTransform>
-                            <Image Source="Assets/Arrow.png" Stretch="Fill" />
+                            <Image Source="ms-appx:///Assets/Arrow.png" Stretch="Fill" />
                         </Button>
-                        <Button x:Name="ButtonLeft" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left"  VerticalAlignment="Center" Height="50"  Width="110" Margin="0,0,0,0" RenderTransformOrigin="0.5,0.5" >
+                        <Button x:Name="ButtonLeft" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left"  VerticalAlignment="Center" Height="50"  Width="110" Margin="0,0,0,0" RenderTransformOrigin="0.5,0.5"  Foreground="White" BorderThickness="1" BorderBrush="#FFFFFFFF" >
                             <Button.RenderTransform>
                                 <CompositeTransform Rotation="270"/>
                             </Button.RenderTransform>
-                            <Image Source="Assets/Arrow.png" Stretch="Fill" />
+                            <Image Source="ms-appx:///Assets/Arrow.png" Stretch="Fill" />
                         </Button>
-                        <Button Content="Lag" Grid.Row="3" Grid.Column="0" HorizontalAlignment="Left" Margin="35,0,0,0" VerticalAlignment="Top" Background="#33060606" Grid.RowSpan="2" Grid.ColumnSpan="2"/>
-                        <Button Content="Flag" Grid.Row="3" Grid.Column="0" HorizontalAlignment="Right" Margin="0,0,5,0" VerticalAlignment="Top" Background="#33060606" Grid.RowSpan="2" Grid.ColumnSpan="2" />
+                        <Button Content="Lag" Grid.Row="3" Grid.Column="0" HorizontalAlignment="Left" Width="70" Margin="35,0,0,0"  VerticalAlignment="Top" Background="#33060606" Grid.RowSpan="2" Grid.ColumnSpan="2" Foreground="White" BorderThickness="1" BorderBrush="#FFFFFFFF"/>
+                        <Button Content="Flag" Grid.Row="3" Grid.Column="0" HorizontalAlignment="Right" Width="70" Margin="0,0,5,0" VerticalAlignment="Top" Background="#33060606" Grid.RowSpan="2" Grid.ColumnSpan="2" Foreground="White" BorderThickness="1" BorderBrush="#FFFFFFFF"/>
                     </Grid>
                 </DataTemplate>
             </HubSection>
@@ -90,7 +105,7 @@
                     <Grid/>
                 </DataTemplate>
             </HubSection>
-            <HubSection VerticalContentAlignment="Stretch">
+            <HubSection x:Name="HubLog" VerticalContentAlignment="Stretch">
                 <DataTemplate>
                     <Grid>
                         <Grid.RowDefinitions>
@@ -99,15 +114,16 @@
                             <RowDefinition Height="2*"/>
                             <RowDefinition Height="2*"/>
                         </Grid.RowDefinitions>
-                        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Visible" MaxHeight="350" Background="#693A3434">
-                            <TextBlock x:Name="cLogView"  HorizontalAlignment="Center" Height="350"  VerticalAlignment="Center" Width="300" Margin="10,20,10,0"  />
+                        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Visible" MaxHeight="335" Background="#7A3A3434">
+                            <TextBlock x:Name="cLogView"  HorizontalAlignment="Center" Height="335" MaxHeight="335"  VerticalAlignment="Center" Width="300" Margin="10,20,10,18"  
+                                       Text="{Binding log, Mode=OneWay}" Foreground="White" FontSize="13.333"/>
                         </ScrollViewer>
                         <!--  <ListView x:Name="cLogView"  Grid.Row="1" HorizontalAlignment="Center" Height="350"  VerticalAlignment="Center" Width="300" RenderTransformOrigin="0.52,0.59" Background="#33000000" BorderBrush="White" />      -->
                         <Button x:Name="cLimpBt" Content="Limpar" Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="35,0,0,0"  Foreground="White" Background="#33060606"  BorderThickness="2" BorderBrush="#FFFFFFFF" Click="cLimpBt_Click"/>
-                        <Button Content="Salvar..." Grid.Row="2" HorizontalAlignment="Right" Margin="0,0,35,0" VerticalAlignment="Center" Foreground="White" Background="#33060606"  BorderThickness="2" BorderBrush="#FFFFFFFF"/>
+                        <Button Content="Salvar..." Grid.Row="2" HorizontalAlignment="Right" Margin="0,0,35,0" VerticalAlignment="Center" Background="#33060606"  Foreground="White" BorderThickness="2" BorderBrush="#FFFFFFFF"/>
                     </Grid>
                 </DataTemplate>
-           </HubSection>
+            </HubSection>
         </Hub>
     </Grid>
 </Page>

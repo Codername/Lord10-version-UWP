@@ -112,6 +112,20 @@
     <Compile Include="Forms\MainForm.xaml.cs">
       <DependentUpon>MainForm.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Forms\ViewControlMainPage.cs" />
+    <Compile Include="Lego.Ev3.Core\Brick.cs" />
+    <Compile Include="Lego.Ev3.Core\BrickButtons.cs" />
+    <Compile Include="Lego.Ev3.Core\BrickChangedEventArgs.cs" />
+    <Compile Include="Lego.Ev3.Core\Command.cs" />
+    <Compile Include="Lego.Ev3.Core\DataReceivedEventArgs.cs" />
+    <Compile Include="Lego.Ev3.Core\DirectCommand.cs" />
+    <Compile Include="Lego.Ev3.Core\DummyCommunication.cs" />
+    <Compile Include="Lego.Ev3.Core\Enums.cs" />
+    <Compile Include="Lego.Ev3.Core\ICommunication.cs" />
+    <Compile Include="Lego.Ev3.Core\Port.cs" />
+    <Compile Include="Lego.Ev3.Core\Response.cs" />
+    <Compile Include="Lego.Ev3.Core\ResponseManager.cs" />
+    <Compile Include="Lego.Ev3.Core\SystemCommand.cs" />
     <Compile Include="Libcomn.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
@@ -129,6 +143,7 @@
     <Content Include="Assets\1982669.png" />
     <Content Include="Assets\1984247.jpg" />
     <Content Include="Assets\About.png" />
+    <Content Include="Assets\Arrow.png" />
     <Content Include="Assets\Esplash II.png" />
     <Content Include="Assets\Esplash.png" />
     <Content Include="Assets\Half Back.png" />
@@ -136,6 +151,9 @@
     <Content Include="Assets\Logo App About.png" />
     <Content Include="Assets\Result 4.png" />
     <Content Include="Assets\SplashII.png" />
+    <Content Include="Assets\Stop.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Assets\StoreLogo.scale-100.png" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />

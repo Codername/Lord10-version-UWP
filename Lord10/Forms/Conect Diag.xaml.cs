@@ -19,11 +19,39 @@ namespace Lord10.Forms
 {
     public sealed partial class Conect_Diag : ContentDialog
     {
+        
+
+        private RobotLag _LAG;
+        private RobotFlag _FLAG;
+
         public Conect_Diag()
         {
             this.InitializeComponent();
-            this.Label_Status.Text = "Conectando Lag... Isso pode demorar...";
             this.IsPrimaryButtonEnabled = false;
+            _LAG  = ((App)Application.Current).LAG;
+            _FLAG = ((App)Application.Current).FLAG;
+            if (!_LAG.IsConnected && !_FLAG.IsConnected) // NOT Robos conectados ???
+            {
+                if (!_LAG.Getstatus() && !_FLAG.Getstatus()) // NOT Selecionados ????
+                {
+                    // Mensagem solicitando conectar pelo menos um Mindstorms
+
+                    ProgreesTemp.Visibility = Visibility.Collapsed;
+                    MesgGlob.Text = "Você precisa habilitar pelo menos um controlador Lego Mindstorms em configurações.";
+                    MesgGlob.FontSize = 13;
+                    MesgGlob.Visibility = Visibility.Visible;
+                }
+                else
+                {
+                    this.Label_Status.Text = "Conectando Lag... Isso pode demorar...";
+                    _LAG.Connect();
+                }
+            }
+            else
+            {
+                //  TODO : FLAG ou LAG ja conectado
+                
+            }
         }
 
         private void ContentDialog_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)

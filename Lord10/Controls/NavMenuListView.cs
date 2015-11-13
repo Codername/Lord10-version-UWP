@@ -121,6 +121,8 @@ namespace Lord10.Controls
         /// until a 'Space' or 'Enter' key is pressed. 
         /// </summary>
         /// <param name="e"></param>
+
+
         protected override void OnKeyDown(KeyRoutedEventArgs e)
         {
             var focusedItem = FocusManager.GetFocusedElement();

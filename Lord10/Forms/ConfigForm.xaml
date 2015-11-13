@@ -14,8 +14,8 @@
         </CommandBar>
     </Page.BottomAppBar>
     <Grid Background="{ThemeResource AppBackgroundLego}">
-        <Grid Background="#C4000000" >
-            <Grid.RowDefinitions>
+        <Grid Background="#C4000000" MinHeight="150" >
+             <Grid.RowDefinitions>
                 <RowDefinition Height="2*"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
@@ -31,11 +31,7 @@
 
             <ToggleSwitch x:Name="cCheckIPFlag" Grid.Row="3"  OnContent="Robô Flag Habilitado" OffContent="Robô Flag Desabilitado"  HorizontalAlignment="Left" Margin="15,0,0,0" VerticalAlignment="Center"  RequestedTheme="Dark" Toggled="cCheckIPFlag_Toggled_1" />
             <ToggleSwitch x:Name="cCheckIPLag" Grid.Row="1" OnContent="Robô Lag Habilitado" OffContent="Robô Lag Desabilitado" HorizontalAlignment="Left" Margin="15,0,0,0" VerticalAlignment="Center"  RequestedTheme="Dark" Toggled="cCheckIPLag_Toggled" />
-
-
-            <!-- <ToggleButton x:Name="cCheckIPFlag" Grid.Row="3" Content="Habilita Robô Flag" HorizontalAlignment="Left" Margin="15,0,0,0" VerticalAlignment="Center" IsChecked="{Binding ChkFlag, Mode=TwoWay}" Foreground="White"/>
-             -->
-        </Grid>
+            </Grid>
         <c:PageHeader x:Name="pageHeader">
             <c:PageHeader.HeaderContent>
                 <TextBlock x:Name="title" Style="{ThemeResource PageTitleTextBlockStyle}" Text="Configurações..."/>

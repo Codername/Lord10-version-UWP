@@ -21,8 +21,9 @@
             <ContentPresenter x:Name="content"
                               VerticalAlignment="{x:Bind VerticalContentAlignment}"
                               HorizontalAlignment="{x:Bind HorizontalContentAlignment}"
-                              Margin="{x:Bind Padding}"
+                              Margin="50,0,0,0"
                               Content="{x:Bind HeaderContent}"/>
+            <Image x:Name="image" HorizontalAlignment="Left" Height="48" VerticalAlignment="Top" Width="48" Margin="0,0,0,0" Source="ms-appx:///Assets/Square44x44Logo.png"/>
         </Grid>
     </Grid>
 </UserControl>
