@@ -14,6 +14,7 @@
          Storyboard.TargetName="AppBarConnect"
          Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.Rotation)" />
         </Storyboard>
+
     </Page.Resources>
 
     <Page.BottomAppBar>
@@ -27,19 +28,21 @@
         </CommandBar>
 
     </Page.BottomAppBar>
-    <Grid Style="{ThemeResource GridBKLegoStyle}">
+    <Grid x:Name="MainGrid" Style="{ThemeResource GridBKLegoStyle}">
         <c:PageHeader x:Name="pageHeader">
             <c:PageHeader.HeaderContent>
                 <TextBlock x:Name="title" Style="{ThemeResource PageTitleTextBlockStyle}" Text="Lord Nelson Robot Control"/>
             </c:PageHeader.HeaderContent>
         </c:PageHeader>
 
-        <Hub Margin="0,48,0,0">
+        <Hub Name="MainHub" Margin="0,48,0,0" >
             <HubSection VerticalContentAlignment="Stretch" HorizontalAlignment="Stretch" Width="357">
                 <DataTemplate>
-                    <Grid  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="349">
+                    <Grid Name="RemoteControl" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="349">
+                        <Grid.Resources>
+                        </Grid.Resources>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="2*"/>
                             <RowDefinition Height="12*"/>
                             <RowDefinition Height="*"/>
                             <RowDefinition Height="2*"/>
@@ -50,6 +53,15 @@
                             <ColumnDefinition Width="9*"/>
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
+                        
+                        <Rectangle Grid.ColumnSpan="3" HorizontalAlignment="Left" Height="48" Margin="13,0,0,0" Stroke="Transparent" VerticalAlignment="Top" Width="305" Fill="#3F000000"/>
+
+
+                        <TextBlock x:Name="textBlock" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Controle Remoto" VerticalAlignment="Top" Grid.ColumnSpan="2" Width="240" Grid.Column="1" Margin="58,6,0,0" Foreground="White" FontSize="24"/>
+                        <Image x:Name="image" Grid.Column="1" HorizontalAlignment="Left" Height="36" Margin="14,4,0,0" VerticalAlignment="Top" Width="36" Source="ms-appx:///Assets/Controle Remoto transparante x100.png"/>
+                        
+                        
+                        
                         <Rectangle Grid.Row="1" Grid.Column="1" Margin="0,0,0,0" Stroke="Transparent"  VerticalAlignment="center" Width="240" Height="240">
                             <Rectangle.Fill>
                                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -61,6 +73,7 @@
                                     <GradientStop Color="#7F1F1489" Offset="0.478"/>
                                 </LinearGradientBrush>
                             </Rectangle.Fill>
+                            
                         </Rectangle>
                         <Button x:Name="ButtonStop" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center"  VerticalAlignment="Center" Height="110"  Width="110"
                                  Foreground="White" BorderThickness="2" BorderBrush="#FFFFFFFF">
@@ -89,9 +102,40 @@
                             </Button.RenderTransform>
                             <Image Source="ms-appx:///Assets/Arrow.png" Stretch="Fill" />
                         </Button>
-                        <Button Content="Lag" Grid.Row="3" Grid.Column="0" HorizontalAlignment="Left" Width="70" Margin="35,0,0,0"  VerticalAlignment="Top" Background="#33060606" Grid.RowSpan="2" Grid.ColumnSpan="2" Foreground="White" BorderThickness="1" BorderBrush="#FFFFFFFF"/>
+                        <Button
+                            x:Name="cButtonLAG" Content="Lag" Grid.Row="3" Grid.Column="0" HorizontalAlignment="Left" Width="70" Margin="35,0,0,0"  VerticalAlignment="Top" Background="#33060606" Grid.RowSpan="2" Grid.ColumnSpan="2" Foreground="White" BorderThickness="1" BorderBrush="#FFFFFFFF" >
+                            <Button.Resources>
+                                <Storyboard x:Name="StoryboardOnFlag" RepeatBehavior="Forever" >
+                                    <DoubleAnimationUsingKeyFrames EnableDependentAnimation="True" Storyboard.TargetProperty="(Control.Background).(GradientBrush.GradientStops)[2].(GradientStop.Offset)" Storyboard.TargetName="cButtonLAG">
+                                        <EasingDoubleKeyFrame KeyTime="0:0:1" Value="0.5"/>
+                                    </DoubleAnimationUsingKeyFrames>
+                                    <DoubleAnimationUsingKeyFrames EnableDependentAnimation="True" Storyboard.TargetProperty="(Control.Background).(GradientBrush.GradientStops)[0].(GradientStop.Offset)" Storyboard.TargetName="cButtonLAG">
+                                        <EasingDoubleKeyFrame KeyTime="0" Value="0.5"/>
+                                        <EasingDoubleKeyFrame KeyTime="0:0:1" Value="0.01"/>
+                                    </DoubleAnimationUsingKeyFrames>
+                                    <DoubleAnimationUsingKeyFrames EnableDependentAnimation="True" Storyboard.TargetProperty="(Control.Background).(GradientBrush.GradientStops)[1].(GradientStop.Offset)" Storyboard.TargetName="cButtonLAG">
+                                        <EasingDoubleKeyFrame KeyTime="0" Value="1"/>
+                                        <EasingDoubleKeyFrame KeyTime="0:0:1" Value="0.99"/>
+                                    </DoubleAnimationUsingKeyFrames>
+                                    <ColorAnimationUsingKeyFrames EnableDependentAnimation="True" Storyboard.TargetProperty="(Control.Background).(GradientBrush.GradientStops)[2].(GradientStop.Color)" Storyboard.TargetName="cButtonLAG">
+                                        <EasingColorKeyFrame KeyTime="0" Value="#5900FB17"/>
+                                        <EasingColorKeyFrame KeyTime="0:0:1" Value="#A500FB17"/>
+                                    </ColorAnimationUsingKeyFrames>
+                                    <ColorAnimationUsingKeyFrames EnableDependentAnimation="True" Storyboard.TargetProperty="(Control.Background).(GradientBrush.GradientStops)[0].(GradientStop.Color)" Storyboard.TargetName="cButtonLAG">
+                                        <EasingColorKeyFrame KeyTime="0:0:1" Value="#19000000"/>
+                                    </ColorAnimationUsingKeyFrames>
+                                    <ColorAnimationUsingKeyFrames EnableDependentAnimation="True" Storyboard.TargetProperty="(Control.Background).(GradientBrush.GradientStops)[1].(GradientStop.Color)" Storyboard.TargetName="cButtonLAG">
+                                        <EasingColorKeyFrame KeyTime="0" Value="#5900FB17"/>
+                                        <EasingColorKeyFrame KeyTime="0:0:1" Value="#19000000"/>
+                                    </ColorAnimationUsingKeyFrames>
+                                </Storyboard>
+                            </Button.Resources>
+                        </Button>
+
+
                         <Button Content="Flag" Grid.Row="3" Grid.Column="0" HorizontalAlignment="Right" Width="70" Margin="0,0,5,0" VerticalAlignment="Top" Background="#33060606" Grid.RowSpan="2" Grid.ColumnSpan="2" Foreground="White" BorderThickness="1" BorderBrush="#FFFFFFFF"/>
                     </Grid>
+
                 </DataTemplate>
             </HubSection>
             <HubSection Header="HubSection 1">
@@ -109,12 +153,16 @@
                 <DataTemplate>
                     <Grid>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="2*"/>
                             <RowDefinition Height="13*"/>
                             <RowDefinition Height="2*"/>
                             <RowDefinition Height="2*"/>
                         </Grid.RowDefinitions>
-                        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Visible" MaxHeight="335" Background="#7A3A3434">
+                        <Rectangle Grid.ColumnSpan="3" HorizontalAlignment="Left" Height="48" Margin="10,0,0,0" Stroke="Transparent" VerticalAlignment="Top" Width="294" Fill="#3F000000"/>
+                        <TextBlock  HorizontalAlignment="Left" TextWrapping="Wrap" Text="Log de Comunicação" VerticalAlignment="Top" Grid.ColumnSpan="2" Width="240" Grid.Column="1" Margin="58,6,0,0" Foreground="White" FontSize="24"/>
+                        <Image x:Name="image" Grid.Column="1" HorizontalAlignment="Left" Height="36" Margin="17,5,0,0" VerticalAlignment="Top" Width="36" Source="ms-appx:///Assets/clipboard65.png"/>
+                        
+                        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Visible" MaxHeight="335" Background="#7A3A3434" Margin="0,10,0,0">
                             <TextBlock x:Name="cLogView"  HorizontalAlignment="Center" Height="335" MaxHeight="335"  VerticalAlignment="Center" Width="300" Margin="10,20,10,18"  
                                        Text="{Binding log, Mode=OneWay}" Foreground="White" FontSize="13.333"/>
                         </ScrollViewer>
@@ -125,6 +173,8 @@
                 </DataTemplate>
             </HubSection>
         </Hub>
+        
+
     </Grid>
 </Page>
 

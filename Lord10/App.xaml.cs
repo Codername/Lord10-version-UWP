@@ -16,6 +16,7 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using Windows.Foundation.Metadata;
 using Lord10.Forms;
+using Windows.UI;
 
 namespace Lord10
 {
@@ -87,8 +88,18 @@ namespace Lord10
                 statusBar.BackgroundOpacity = 1;
                 statusBar.HideAsync();
             }
+            else
+            {
+                var appView = Windows.UI.ViewManagement.ApplicationView.GetForCurrentView();
+                //   appView.TitleBar.BackgroundColor = Colors.MidnightBlue;
+                appView.TitleBar.BackgroundColor =Color.FromArgb(100, 0, 120, 215);
+                appView.TitleBar.ButtonBackgroundColor = Color.FromArgb(100, 0, 120, 215);
+                appView.TitleBar.ForegroundColor = Colors.White;
+                appView.TitleBar.ButtonForegroundColor = Colors.White;
 
-           
+            }
+
+
             MainPage shell = Window.Current.Content as MainPage;
 
             

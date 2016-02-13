@@ -15,6 +15,7 @@ using Windows.UI.Xaml.Navigation;
 using Lord10.Controls;
 using System.Diagnostics; // Uso do Writeline DEBUG
 using Windows.UI.Xaml.Media.Animation;
+using Lord10;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -46,30 +47,15 @@ namespace Lord10.Forms
         async private void AppBarButton_Sync(object sender, RoutedEventArgs e)
         {
 
-            /// Animação de Botões
-            /// 
-
-            /*            RotateTransform transform = new RotateTransform()
-                        {
-                            CenterX = 0.5,
-                            CenterY = 0.5,
-                            Angle = 0,
-                        };
-
-                        AppBarConnect.RenderTransform = transform;
-
-                        DoubleAnimation animation = new DoubleAnimation()
-                        {
-                            From = 0,
-                            To = 360,
-                            Duration = TimeSpan.FromSeconds(3),
-                            RepeatBehavior = RepeatBehavior.Forever
-                        };
-
-
-                        transform.*/
+            
 
             spinButton.Begin();
+
+            // Chame StoryButton FLAG
+            Storyboard sb = ( sysutils.FindVisualChild<Button>(MainHub, "cButtonLAG") as Button).Resources["StoryboardOnFlag"] as Storyboard;
+            // sb.Begin();
+
+
             // Chama Diag
 
             Conect_Diag conf = new Conect_Diag();
@@ -105,4 +91,5 @@ namespace Lord10.Forms
             view.log += msg;
         }
     }
+  
 }

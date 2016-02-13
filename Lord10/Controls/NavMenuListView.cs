@@ -104,11 +104,11 @@ namespace Lord10.Controls
                 {
                     lvi.IsSelected = true;
                     lvi.Background = new SolidColorBrush(Color.FromArgb(100, 216, 22, 22));
-                    lvi.Foreground = new SolidColorBrush(Colors.White); ;
+                    lvi.Foreground = new SolidColorBrush(Colors.White); 
                 }
             }
 
-
+            
         }
 
         /// <summary>

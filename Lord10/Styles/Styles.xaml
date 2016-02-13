@@ -137,4 +137,32 @@
         <Setter Property="Background" Value="{StaticResource AppBackgroundLego}" />
     </Style>
 
+    <Style x:Key="BaseMessageStyle" TargetType="TextBlock">
+        <Setter Property="FontFamily" Value="Segoe UI"/>
+        <Setter Property="FontWeight" Value="SemiLight"/>
+        <Setter Property="FontSize" Value="14.667"/>
+        <Setter Property="Margin" Value="0,0,0,5"/>
+    </Style>
+
+    <Style x:Key="SeparatorStyle" TargetType="TextBlock">
+        <Setter Property="FontFamily" Value="Segoe UI"/>
+        <Setter Property="FontSize" Value="9"/>
+        <Setter Property="Foreground" Value="Gray"/>
+    </Style>
+
+    <Style x:Key="CopyrightTextStyle" TargetType="TextBlock" BasedOn="{StaticResource BaseTextBlockStyle}">
+        <Setter Property="FontWeight" Value="Normal"/>
+    </Style>
+
+
+    <LinearGradientBrush x:Key="BrushPadraoVerdeAtivo" EndPoint="0.5,1" StartPoint="0.5,0">
+        <LinearGradientBrush.RelativeTransform>
+            <CompositeTransform CenterY="0.5" CenterX="0.5" Rotation="90"/>
+        </LinearGradientBrush.RelativeTransform>
+        <GradientStop Color="#72000000" Offset="0.469"/>
+        <GradientStop Color="#3312B00A" Offset="0.879"/>
+        <GradientStop Color="#5E053503"/>
+    </LinearGradientBrush>
+
+
 </ResourceDictionary>

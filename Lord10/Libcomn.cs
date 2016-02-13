@@ -5,6 +5,9 @@ using System.Text;
 using System.Net;
 using System.Threading.Tasks;
 using System.Diagnostics;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Controls;
 
 namespace Lord10
 {
@@ -17,7 +20,31 @@ namespace Lord10
         Windows.Storage.ApplicationDataContainer LocalSettings = Windows.Storage.ApplicationData.Current.LocalSettings;
         Windows.Storage.StorageFolder localfolder = Windows.Storage.ApplicationData.Current.LocalFolder;
 
+        ///
+        ///
+        /// Metodo de localização de StoryBoard ON HUB
+        /// ///
+        /// ////
+        /// ////
+        /// //////
 
+        static public childItem FindVisualChild<childItem>(DependencyObject obj, String name)
+                      where childItem : DependencyObject
+        {
+            for (int i = 0; i < VisualTreeHelper.GetChildrenCount(obj); i++)
+            {
+                DependencyObject child = VisualTreeHelper.GetChild(obj, i);
+                if (child != null && child is childItem && ((Button)child).Name == name)
+                    return (childItem)child;
+                else
+                {
+                    childItem childOfChild = FindVisualChild<childItem>(child, name);
+                    if (childOfChild != null)
+                        return childOfChild;
+                }
+            }
+            return null;
+        }
 
 
         public string Get_stored_IP(int parametro)

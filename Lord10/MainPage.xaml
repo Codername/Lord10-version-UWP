@@ -65,6 +65,21 @@
                    IsTabStop="False">
             <SplitView.Pane>
                 <!-- A custom ListView to display the items in the pane.  The automation Name is set in the ContainerContentChanging event. -->
+              
+                <!-- Rodape com Logo NAO ESTA FUNCIONANDO-->
+                
+     <!--           <StackPanel x:Name="FooterPanel" Orientation="Vertical" RelativePanel.AlignBottomWithPanel="True">
+                    <Image Source="Assets/result4.png" AutomationProperties.Name="Microsoft Logo" Stretch="None" HorizontalAlignment="Left" Margin="0,0,0,0"/>
+                    <TextBlock x:Name="Copyright" Text="&#xA9; Microsoft Corporation. All rights reserved." Style="{StaticResource CopyrightTextStyle}"
+                                   RelativePanel.Above="LinksPanel" Margin="0,0,0,0"
+                                   TextWrapping="Wrap"/>
+                        <StackPanel x:Name="LinksPanel" Orientation="Horizontal" Margin="10,10,0,10">
+                            <HyperlinkButton Content="Trademarks" Tag="http://www.microsoft.com/About/Legal/EN/US/IntellectualProperty/Trademarks/EN-US.aspx"
+                               FontSize="12" Style="{StaticResource HyperlinkStyle}" />
+                            <TextBlock Text="|"  Style="{StaticResource SeparatorStyle}" VerticalAlignment="Center" />
+                            <HyperlinkButton x:Name="PrivacyLink" Content="Privacy" Tag="http://privacy.microsoft.com"  FontSize="12" Style="{StaticResource HyperlinkStyle}"/>
+                        </StackPanel> 
+                </StackPanel>    -->
                 <controls:NavMenuListView x:Name="NavMenuList"
                                           TabIndex="3"
                                           Margin="0,48,0,0"
@@ -73,6 +88,7 @@
                                           ItemTemplate="{StaticResource NavMenuItemTemplate}"
                                           ItemInvoked="NavMenuList_ItemInvoked"
                                           Background="#FF2B2B2B">
+                   
                     <controls:NavMenuListView.Header>
                         <!-- Using this custom back navigation button until the system-provided back button is enabled. -->
                         <Button x:Name="BackButton"
@@ -83,7 +99,7 @@
                                 HorizontalAlignment="{Binding ItemsPanelRoot.HorizontalAlignment, ElementName=NavMenuList}"
                                 Click="BackButton_Click"/>
                     </controls:NavMenuListView.Header>
-                </controls:NavMenuListView>
+                    </controls:NavMenuListView>
             </SplitView.Pane>
 
             <!-- OnNavigatingToPage we synchronize the selected item in the nav menu with the current page.
