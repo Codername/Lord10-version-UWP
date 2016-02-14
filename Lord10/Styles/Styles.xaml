@@ -155,14 +155,21 @@
     </Style>
 
 
-    <LinearGradientBrush x:Key="BrushPadraoVerdeAtivo" EndPoint="0.5,1" StartPoint="0.5,0">
-        <LinearGradientBrush.RelativeTransform>
-            <CompositeTransform CenterY="0.5" CenterX="0.5" Rotation="90"/>
-        </LinearGradientBrush.RelativeTransform>
-        <GradientStop Color="#72000000" Offset="0.469"/>
-        <GradientStop Color="#3312B00A" Offset="0.879"/>
-        <GradientStop Color="#5E053503"/>
-    </LinearGradientBrush>
+    <Style x:Key="BrushPadraoVerdeAtivo" TargetType="Button">
+        <Setter Property="Background">
+            <Setter.Value>
+                <LinearGradientBrush  EndPoint="0.5,1" StartPoint="0.5,0">
+                <LinearGradientBrush.RelativeTransform>
+                <CompositeTransform CenterY="0.5" CenterX="0.5" Rotation="90"/>
+                </LinearGradientBrush.RelativeTransform>
+                <GradientStop Color="#72000000" Offset="0.469"/>
+                <GradientStop Color="#3312B00A" Offset="0.879"/>
+                <GradientStop Color="#5E053503"/>
+                </LinearGradientBrush>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
 
 
 </ResourceDictionary>
