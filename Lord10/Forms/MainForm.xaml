@@ -105,35 +105,41 @@
                         <Button
                             x:Name="cButtonLAG" Content="Lag" Grid.Row="3" Grid.Column="0" HorizontalAlignment="Left" Width="70" Margin="35,0,0,0"  VerticalAlignment="Top" Background="#33060606" Grid.RowSpan="2" Grid.ColumnSpan="2" Foreground="White" BorderThickness="1" BorderBrush="#FFFFFFFF" >
                             <Button.Resources>
-                                <Storyboard x:Name="StoryboardOnFlag" RepeatBehavior="Forever" >
-                                    <DoubleAnimationUsingKeyFrames EnableDependentAnimation="True" Storyboard.TargetProperty="(Control.Background).(GradientBrush.GradientStops)[2].(GradientStop.Offset)" Storyboard.TargetName="cButtonLAG">
-                                        <EasingDoubleKeyFrame KeyTime="0:0:1" Value="0.5"/>
-                                    </DoubleAnimationUsingKeyFrames>
+                                    <Storyboard x:Name="StoryboardOnLag" RepeatBehavior="Forever" AutoReverse="True">
                                     <DoubleAnimationUsingKeyFrames EnableDependentAnimation="True" Storyboard.TargetProperty="(Control.Background).(GradientBrush.GradientStops)[0].(GradientStop.Offset)" Storyboard.TargetName="cButtonLAG">
-                                        <EasingDoubleKeyFrame KeyTime="0" Value="0.5"/>
-                                        <EasingDoubleKeyFrame KeyTime="0:0:1" Value="0.01"/>
-                                    </DoubleAnimationUsingKeyFrames>
+                                            <EasingDoubleKeyFrame KeyTime="0:0:2" Value="1">
+                                            <EasingDoubleKeyFrame.EasingFunction>
+                                                <BackEase EasingMode="EaseOut"/>
+                                            </EasingDoubleKeyFrame.EasingFunction>
+                                        </EasingDoubleKeyFrame>
+                                        </DoubleAnimationUsingKeyFrames>
                                     <DoubleAnimationUsingKeyFrames EnableDependentAnimation="True" Storyboard.TargetProperty="(Control.Background).(GradientBrush.GradientStops)[1].(GradientStop.Offset)" Storyboard.TargetName="cButtonLAG">
-                                        <EasingDoubleKeyFrame KeyTime="0" Value="1"/>
-                                        <EasingDoubleKeyFrame KeyTime="0:0:1" Value="0.99"/>
-                                    </DoubleAnimationUsingKeyFrames>
-                                    <ColorAnimationUsingKeyFrames EnableDependentAnimation="True" Storyboard.TargetProperty="(Control.Background).(GradientBrush.GradientStops)[2].(GradientStop.Color)" Storyboard.TargetName="cButtonLAG">
-                                        <EasingColorKeyFrame KeyTime="0" Value="#5900FB17"/>
-                                        <EasingColorKeyFrame KeyTime="0:0:1" Value="#A500FB17"/>
-                                    </ColorAnimationUsingKeyFrames>
-                                    <ColorAnimationUsingKeyFrames EnableDependentAnimation="True" Storyboard.TargetProperty="(Control.Background).(GradientBrush.GradientStops)[0].(GradientStop.Color)" Storyboard.TargetName="cButtonLAG">
-                                        <EasingColorKeyFrame KeyTime="0:0:1" Value="#19000000"/>
-                                    </ColorAnimationUsingKeyFrames>
+                                            <EasingDoubleKeyFrame KeyTime="0:0:2" Value="0.1">
+                                                <EasingDoubleKeyFrame.EasingFunction>
+                                                    <BackEase EasingMode="EaseOut"/>
+                                                </EasingDoubleKeyFrame.EasingFunction>
+                                            </EasingDoubleKeyFrame>
+                                        </DoubleAnimationUsingKeyFrames>
                                     <ColorAnimationUsingKeyFrames EnableDependentAnimation="True" Storyboard.TargetProperty="(Control.Background).(GradientBrush.GradientStops)[1].(GradientStop.Color)" Storyboard.TargetName="cButtonLAG">
-                                        <EasingColorKeyFrame KeyTime="0" Value="#5900FB17"/>
-                                        <EasingColorKeyFrame KeyTime="0:0:1" Value="#19000000"/>
-                                    </ColorAnimationUsingKeyFrames>
-                                </Storyboard>
+                                            <EasingColorKeyFrame KeyTime="0" Value="#CC0BC747"/>
+                                            <EasingColorKeyFrame KeyTime="0:0:2" Value="#CC0BC747"/>
+                                        </ColorAnimationUsingKeyFrames>
+                                    </Storyboard>
                             </Button.Resources>
                         </Button>
 
 
-                        <Button Content="Flag" Grid.Row="3" Grid.Column="0" HorizontalAlignment="Right" Width="70" Margin="0,0,5,0" VerticalAlignment="Top" Background="#33060606" Grid.RowSpan="2" Grid.ColumnSpan="2" Foreground="White" BorderThickness="1" BorderBrush="#FFFFFFFF"/>
+                        <Button   x:Name="cButtonFLAG"  Content="Flag" Grid.Row="3" Grid.Column="0" HorizontalAlignment="Right" Width="70" Margin="0,0,5,0" VerticalAlignment="Top" Background="#33060606" Grid.RowSpan="2" Grid.ColumnSpan="2" Foreground="White" BorderThickness="1" BorderBrush="#FFFFFFFF">
+                            <Button.Resources>
+                                <Storyboard x:Name="StoryboardOnFlag" RepeatBehavior="Forever" AutoReverse="True">
+                                    <ColorAnimation Duration="0:0:1" To="#BF1B9C1B" Storyboard.TargetProperty="(Control.Background).(SolidColorBrush.Color)" Storyboard.TargetName="cButtonFLAG" d:IsOptimized="True">
+                                        <ColorAnimation.EasingFunction>
+                                            <BounceEase EasingMode="EaseInOut"/>
+                                        </ColorAnimation.EasingFunction>
+                                    </ColorAnimation>
+                                </Storyboard>
+                            </Button.Resources>
+                        </Button>
                     </Grid>
 
                 </DataTemplate>

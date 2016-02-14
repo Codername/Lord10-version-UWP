@@ -113,30 +113,21 @@ namespace Lord10.Forms
             BrushPadraoVerdeAtivo.RelativeTransform = trans;
                     // Create and add Gradient stops
                        GradientStop stop1 = new GradientStop();
-                       stop1.Color = Color.FromArgb(0x72, 00, 00, 00);
-                       stop1.Offset = 0.469;
+                       stop1.Color = Color.FromArgb(0x19,00,00,00);
+                       stop1.Offset = 0;
                        BrushPadraoVerdeAtivo.GradientStops.Add(stop1);
                        GradientStop stop2 = new GradientStop();
-                       stop2.Color = Color.FromArgb(0x33, 0x12, 0xB0, 0x0A);
-                       stop2.Offset = 0.879;
+                       stop2.Color = Color.FromArgb(0xCC,0x16,0x9E,0x41);
+                       stop2.Offset = 0.9;
                        BrushPadraoVerdeAtivo.GradientStops.Add(stop2);
-                       GradientStop stop3 = new GradientStop();
-                       stop3.Color = Color.FromArgb(0x5E, 0x05, 0x35, 0x03);
-                       BrushPadraoVerdeAtivo.GradientStops.Add(stop3);
             rbutt.Background = BrushPadraoVerdeAtivo;
 
-            Storyboard sb = (sysutils.FindVisualChild<Button>(MainHub, "cButtonLAG") as Button).Resources["StoryboardOnFlag"] as Storyboard;
-
-            sb.Begin();
-
             /// Inicializa Storyboard
-            /// 
 
-
-
-
-            
-
+            Storyboard sbL = (sysutils.FindVisualChild<Button>(MainHub, "cButtonLAG") as Button).Resources["StoryboardOnLag"] as Storyboard;
+            sbL.Begin();
+            Storyboard sbF = (sysutils.FindVisualChild<Button>(MainHub, "cButtonFLAG") as Button).Resources["StoryboardOnFlag"] as Storyboard;
+            sbF.Begin();
         }
     }
      

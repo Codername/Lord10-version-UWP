@@ -152,8 +152,13 @@
 
     <Style x:Key="CopyrightTextStyle" TargetType="TextBlock" BasedOn="{StaticResource BaseTextBlockStyle}">
         <Setter Property="FontWeight" Value="Normal"/>
+        <Setter Property="Foreground" Value="White"/>
     </Style>
-
+    
+    <Style x:Key="HyperlinkStyle" TargetType="HyperlinkButton">
+        <Setter Property="Padding" Value="1"/>
+        <Setter Property="Foreground" Value="Gray"/>
+    </Style>
 
     <Style x:Key="BrushPadraoVerdeAtivo" TargetType="Button">
         <Setter Property="Background">
