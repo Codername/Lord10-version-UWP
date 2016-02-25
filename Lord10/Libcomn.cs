@@ -12,6 +12,7 @@ using System.Net.Sockets;
 using System.Net.Http;
 using Windows.Networking.Sockets;
 using Windows.UI;
+using Windows.UI.Xaml.Documents;
 
 namespace Lord10
 {
@@ -49,6 +50,33 @@ namespace Lord10
             }
             return null;
         }
+
+
+        /// <summary>
+        ///  Override de Metodo para localizar Rich Text
+        /// </summary>
+        /// <param name="parametro"></param>
+        /// <returns></returns>
+        /// 
+
+        static public childItem FindVisualChildlog<childItem>(DependencyObject obj, String name)
+                 where childItem : DependencyObject
+        {
+            for (int i = 0; i < VisualTreeHelper.GetChildrenCount(obj); i++)
+            {
+                DependencyObject child = VisualTreeHelper.GetChild(obj, i);
+                if (child != null && child is childItem && ((RichTextBlock)child).Name == name)
+                    return (childItem)child;
+                else
+                {
+                    childItem childOfChild = FindVisualChildlog<childItem>(child, name);
+                    if (childOfChild != null)
+                        return childOfChild;
+                }
+            }
+            return null;
+        }
+
 
 
         public string Get_stored_IP(int parametro)
@@ -236,7 +264,7 @@ namespace Lord10
                                      get;
                                }
         protected string textmsg;
-        public delegate void logMsg(string msg);
+        public delegate void logMsg(Paragraph msg);
         public event logMsg event_log;
 
         public delegate void Color_log(Color Cor);
@@ -260,14 +288,31 @@ namespace Lord10
                 if (event_log != null)
                 {
                     this.event_log_color(Colors.DarkGreen);
-                    this.event_log(textmsg);
 
-                    ///// Histórico de Evento  
+                    Paragraph Login = new Paragraph();
+                    Run run = new Run();
+                    run.Foreground = new SolidColorBrush(Windows.UI.Colors.Yellow);
+                    run.FontSize = 13.333;
+                    run.Text = textmsg;
+
+                    Run Complemento = new Run();
                     DateTime Hoje = DateTime.Now;
                     string strl = "_init():: Conect() dispatched as " + Hoje.ToString("T") + " " + Hoje.ToString("d") + "\n";
+                    Complemento.Text = strl;
+                    Complemento.FontSize = 13.333;
+                    Complemento.Foreground = new SolidColorBrush(Windows.UI.Colors.White);
 
-                    this.event_log_color(Colors.White);
-                    this.event_log(strl);
+                    Login.Inlines.Add(run);
+                    Login.Inlines.Add(Complemento);
+
+                    this.event_log(Login);
+
+                    ///// Histórico de Evento  
+//                    DateTime Hoje = DateTime.Now;
+//                    string strl = "_init():: Conect() dispatched as " + Hoje.ToString("T") + " " + Hoje.ToString("d") + "\n";
+
+//                    this.event_log_color(Colors.White);
+//                    this.event_log(strl);
 
                 }
                 webSock = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
@@ -280,12 +325,41 @@ namespace Lord10
             finally {
                 if (event_log != null)
                 {
-                    ///// Histórico de Evento  
-                    DateTime Hoje = DateTime.Now;
 
-                    string strl = textmsg + "_init():: Conect() FATAL ERROR CONNECT as " + Hoje.ToString("T") + " " + Hoje.ToString("d") + "\n";
-                    this.event_log_color(Colors.Red);
-                    this.event_log(strl);
+                    Paragraph Login = new Paragraph();
+                    Run run = new Run();
+                    run.Foreground = new SolidColorBrush(Windows.UI.Colors.Red);
+                    run.FontSize = 13.333;
+                    run.Text = textmsg;
+
+                    Run Complemento = new Run();
+                    Complemento.Text = "_init():: Conect()";
+                    Complemento.FontSize = 13.333;
+                    Complemento.Foreground = new SolidColorBrush(Windows.UI.Colors.White);
+
+                    Run Compl1 = new Run();
+                    Compl1.Foreground = new SolidColorBrush(Windows.UI.Colors.Red);
+                    Compl1.FontSize = 13.333;
+                    Compl1.Text = " FATAL ERROR CONECT ";
+
+                    Run Compl2 = new Run();
+                    DateTime Hoje = DateTime.Now;
+                    Compl2.Foreground = new SolidColorBrush(Windows.UI.Colors.White);
+                    Compl2.FontSize = 13.333;
+                    Compl2.Text = " as " + Hoje.ToString("T") + " " + Hoje.ToString("d") + "\n";
+
+                    Login.Inlines.Add(run);
+                    Login.Inlines.Add(Complemento);
+                    Login.Inlines.Add(Compl1);
+                    Login.Inlines.Add(Compl2);
+
+                    this.event_log(Login);
+                    ///// Histórico de Evento  
+                    /*                   DateTime Hoje = DateTime.Now;
+
+                                       string strl = textmsg + "_init():: Conect() FATAL ERROR CONNECT as " + Hoje.ToString("T") + " " + Hoje.ToString("d") + "\n";
+                                       this.event_log_color(Colors.Red);
+                                       this.event_log(strl);   */
 
                 }
             };

@@ -206,7 +206,7 @@
                             <RichTextBlock x:Name="cLogView"  HorizontalAlignment="Center" Height="335" MaxHeight="335"  VerticalAlignment="Center" Width="300" Margin="10,20,10,18" >
                                 <Paragraph>
                                     <Span>
-                                        <Run Text="{Binding log, Mode=OneWay}" Foreground="{Binding Cor, Mode=OneWay}"  FontSize="13.333"/>
+                                        <Run Text="{Binding log, Mode=OneWay}" Foreground="{Binding Cor, Mode=OneWay,UpdateSourceTrigger=PropertyChanged}"  FontSize="13.333"/>
                                     </Span>
                                 </Paragraph>
                             </RichTextBlock>

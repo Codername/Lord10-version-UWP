@@ -18,6 +18,7 @@ using Lord10.Controls;
 using System.Diagnostics; // Uso do Writeline DEBUG
 using Windows.UI.Xaml.Media.Animation;
 using Lord10;
+using Windows.UI.Xaml.Documents;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -44,7 +45,7 @@ namespace Lord10.Forms
             this.DataContext = view;
             ((App)Application.Current).LAG.event_log += displayLog;
             ((App)Application.Current).LAG.event_log_color += displaycolorLog;
-            ((App)Application.Current).FLAG.event_log += displayLog;
+      //      ((App)Application.Current).FLAG.event_log += displayLog;
         }
 
 
@@ -96,9 +97,11 @@ namespace Lord10.Forms
             
         }
 
-        private void displayLog(string msg)
+        private void displayLog(Paragraph msg)
         {
-            view.log += msg;
+            //           view.log += msg;
+            RichTextBlock log = (sysutils.FindVisualChildlog<RichTextBlock>(MainHub, "cLogView") as RichTextBlock);
+            log.Blocks.Add(msg);
         }
 
         private void displaycolorLog(Color cor)
