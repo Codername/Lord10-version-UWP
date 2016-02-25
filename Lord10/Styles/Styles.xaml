@@ -130,7 +130,7 @@
         <Setter Property="Height" Value="48"/>
         <Setter Property="Padding" Value="0"/>
         <Setter Property="Foreground" Value="White"/>
-     </Style>
+    </Style>
 
     <ImageBrush x:Key="AppBackgroundLego" ImageSource="ms-appx:///Assets/Half Back.png" Stretch="UniformToFill" />
     <Style x:Key="GridBKLegoStyle" TargetType="Grid">

@@ -8,6 +8,10 @@ using System.Diagnostics;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Controls;
+using System.Net.Sockets;
+using System.Net.Http;
+using Windows.Networking.Sockets;
+using Windows.UI;
 
 namespace Lord10
 {
@@ -220,6 +224,14 @@ namespace Lord10
         //  HostName ip = new HostName("192.168.1.2");
         private string _ipdef;
         private bool _active;
+
+        private Socket webSock;          // <summary>
+        private MessageWebSocket msgSock;
+
+        private HttpClient client;
+
+
+        
         public bool IsConnected{
                                      get;
                                }
@@ -227,9 +239,13 @@ namespace Lord10
         public delegate void logMsg(string msg);
         public event logMsg event_log;
 
+        public delegate void Color_log(Color Cor);
+        public event Color_log event_log_color;
+
         public Comn() {
                         IsConnected = false;
                         }
+        
 
         public void SetIp(string par)
         {
@@ -239,13 +255,41 @@ namespace Lord10
 
         public virtual void Connect()
         {
-            if (event_log != null )
+            try
             {
-                DateTime Hoje = DateTime.Now;
-                string strl = textmsg+"_init():: Conect() dispatched as "+Hoje.ToString("T")+" "+ Hoje.ToString("d") + "\n";
-                this.event_log(strl);
+                if (event_log != null)
+                {
+                    this.event_log_color(Colors.DarkGreen);
+                    this.event_log(textmsg);
 
+                    ///// Histórico de Evento  
+                    DateTime Hoje = DateTime.Now;
+                    string strl = "_init():: Conect() dispatched as " + Hoje.ToString("T") + " " + Hoje.ToString("d") + "\n";
+
+                    this.event_log_color(Colors.White);
+                    this.event_log(strl);
+
+                }
+                webSock = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+                //                sck.AcceptAsync()
+
+                //                sck.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReuseAddress, true);
+
+           
             }
+            finally {
+                if (event_log != null)
+                {
+                    ///// Histórico de Evento  
+                    DateTime Hoje = DateTime.Now;
+
+                    string strl = textmsg + "_init():: Conect() FATAL ERROR CONNECT as " + Hoje.ToString("T") + " " + Hoje.ToString("d") + "\n";
+                    this.event_log_color(Colors.Red);
+                    this.event_log(strl);
+
+                }
+            };
+            
         }
 
 
@@ -297,6 +341,7 @@ namespace Lord10
             this.SetIp(str);
             this.Setstatus(Sts);
             this.textmsg = "LAG: ";
+
         }
         
         ~RobotLag()

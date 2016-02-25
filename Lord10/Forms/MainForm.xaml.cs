@@ -38,10 +38,12 @@ namespace Lord10.Forms
             // Inicialização do mode View
             view = new ViewControlMainPage
             {
-                log = ""
+                log = "",
+                Cor = new SolidColorBrush(Colors.White)
             };
             this.DataContext = view;
             ((App)Application.Current).LAG.event_log += displayLog;
+            ((App)Application.Current).LAG.event_log_color += displaycolorLog;
             ((App)Application.Current).FLAG.event_log += displayLog;
         }
 
@@ -98,6 +100,12 @@ namespace Lord10.Forms
         {
             view.log += msg;
         }
+
+        private void displaycolorLog(Color cor)
+        {
+            view.Cor = new SolidColorBrush(cor);
+        }
+
         private void Display_Animation_Button( Button rbutt )
         {
             /// Criação de Gradiente manual
@@ -113,18 +121,31 @@ namespace Lord10.Forms
             BrushPadraoVerdeAtivo.RelativeTransform = trans;
                     // Create and add Gradient stops
                        GradientStop stop1 = new GradientStop();
-                       stop1.Color = Color.FromArgb(0x19,00,00,00);
-                       stop1.Offset = 0;
+                       stop1.Color = Color.FromArgb(0xDD,0x00,0xF3,0x37);
+                       stop1.Offset = 0.5;
                        BrushPadraoVerdeAtivo.GradientStops.Add(stop1);
                        GradientStop stop2 = new GradientStop();
-                       stop2.Color = Color.FromArgb(0xCC,0x16,0x9E,0x41);
-                       stop2.Offset = 0.9;
+                       stop2.Color = Color.FromArgb(0x52,0x00,0xFF,0xB9);
+                       stop2.Offset = 1;
                        BrushPadraoVerdeAtivo.GradientStops.Add(stop2);
+                       GradientStop stop3 = new GradientStop();
+                       stop3.Color = Color.FromArgb(0x52,0x00,0xFF,0xB9);
+                       BrushPadraoVerdeAtivo.GradientStops.Add(stop3);
+                       GradientStop stop4 = new GradientStop();
+                       stop4.Color = Color.FromArgb(0x78,0x00,0xF8,0x71);
+                       stop4.Offset = 0.226;
+                       BrushPadraoVerdeAtivo.GradientStops.Add(stop4);
+                       GradientStop stop5 = new GradientStop();
+                       stop5.Color = Color.FromArgb(0x7A,0x00,0xF8,0x6E);
+                       stop5.Offset = 0.787;
+                       BrushPadraoVerdeAtivo.GradientStops.Add(stop5);
+
             rbutt.Background = BrushPadraoVerdeAtivo;
+             
+                           
+                                              /// Inicializa Storyboard
 
-            /// Inicializa Storyboard
-
-            Storyboard sbL = (sysutils.FindVisualChild<Button>(MainHub, "cButtonLAG") as Button).Resources["StoryboardOnLag"] as Storyboard;
+                                              Storyboard sbL = (sysutils.FindVisualChild<Button>(MainHub, "cButtonLAG") as Button).Resources["StoryboardOnLag"] as Storyboard;
             sbL.Begin();
             Storyboard sbF = (sysutils.FindVisualChild<Button>(MainHub, "cButtonFLAG") as Button).Resources["StoryboardOnFlag"] as Storyboard;
             sbF.Begin();

@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel;
+using Windows.UI;
+using Windows.UI.Xaml.Media;
 
 namespace Lord10.Forms
 {
@@ -22,6 +24,18 @@ namespace Lord10.Forms
             }
         }
 
+        public Brush _Cor;
+        public Brush Cor
+        {
+            get { return this._Cor; }
+            set
+            {
+                if (this._Cor == value)
+                    return;
+                this._Cor = value;
+                this.OnPropertyChanged("Cor");
+            }
+        }
 
         protected virtual void OnPropertyChanged(string propertyName)
         {

@@ -19,18 +19,20 @@
 
     <Page.Resources>
         <DataTemplate x:Key="NavMenuItemTemplate" x:DataType="local:NavMenuItem">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="48" />
-                    <ColumnDefinition />
-                </Grid.ColumnDefinitions>
-                <!-- Showing a ToolTip and the Label is redundant.  We put the ToolTip on the icon.
+           
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="48" />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <!-- Showing a ToolTip and the Label is redundant.  We put the ToolTip on the icon.
                      It appears when the user hovers over the icon, but not the label which provides
                      value when the SplitView is 'Compact' while reducing the likelihood of showing
                      redundant information when the label is shown.-->
-                <FontIcon x:Name="Glyph" FontSize="16" Glyph="{x:Bind SymbolAsChar}" VerticalAlignment="Center" HorizontalAlignment="Center" ToolTipService.ToolTip="{x:Bind Label}"/>
-                <TextBlock x:Name="Text" Grid.Column="1" Text="{x:Bind Label}" />
-            </Grid>
+                    <FontIcon x:Name="Glyph" Grid.Column="0" FontSize="16" Glyph="{x:Bind SymbolAsChar}" Foreground="Orange" VerticalAlignment="Center" HorizontalAlignment="Center" ToolTipService.ToolTip="{x:Bind Label}"  />
+                    <TextBlock x:Name="Text" Grid.Column="1" Margin="0,3,0,0" Text="{x:Bind Label}" />
+                </Grid>
+           
         </DataTemplate>
     </Page.Resources>
 

@@ -106,25 +106,59 @@
                             x:Name="cButtonLAG" Content="Lag" Grid.Row="3" Grid.Column="0" HorizontalAlignment="Left" Width="70" Margin="35,0,0,0"  VerticalAlignment="Top" Background="#33060606" Grid.RowSpan="2" Grid.ColumnSpan="2" Foreground="White" BorderThickness="1" BorderBrush="#FFFFFFFF" >
                             <Button.Resources>
                                     <Storyboard x:Name="StoryboardOnLag" RepeatBehavior="Forever" AutoReverse="True">
-                                    <DoubleAnimationUsingKeyFrames EnableDependentAnimation="True" Storyboard.TargetProperty="(Control.Background).(GradientBrush.GradientStops)[0].(GradientStop.Offset)" Storyboard.TargetName="cButtonLAG">
-                                            <EasingDoubleKeyFrame KeyTime="0:0:2" Value="1">
+                                    <ColorAnimationUsingKeyFrames EnableDependentAnimation="True" Storyboard.TargetProperty="(Control.Background).(GradientBrush.GradientStops)[1].(GradientStop.Color)" Storyboard.TargetName="cButtonLAG">
+                                        <EasingColorKeyFrame KeyTime="0:0:3" Value="#A500F337">
+                                            <EasingColorKeyFrame.EasingFunction>
+                                                <BackEase EasingMode="EaseIn"/>
+                                            </EasingColorKeyFrame.EasingFunction>
+                                        </EasingColorKeyFrame>
+                                    </ColorAnimationUsingKeyFrames>
+                                    <ColorAnimationUsingKeyFrames EnableDependentAnimation="True" Storyboard.TargetProperty="(Control.Background).(GradientBrush.GradientStops)[0].(GradientStop.Color)" Storyboard.TargetName="cButtonLAG">
+                                        <EasingColorKeyFrame KeyTime="0" Value="#E800F337"/>
+                                        <EasingColorKeyFrame KeyTime="0:0:3" Value="#4200FFB9">
+                                            <EasingColorKeyFrame.EasingFunction>
+                                                <BackEase EasingMode="EaseIn"/>
+                                            </EasingColorKeyFrame.EasingFunction>
+                                        </EasingColorKeyFrame>
+                                    </ColorAnimationUsingKeyFrames>
+                                    <ColorAnimationUsingKeyFrames EnableDependentAnimation="True" Storyboard.TargetProperty="(Control.Background).(GradientBrush.GradientStops)[2].(GradientStop.Color)" Storyboard.TargetName="cButtonLAG">
+                                        <EasingColorKeyFrame KeyTime="0:0:3" Value="#A500F337">
+                                            <EasingColorKeyFrame.EasingFunction>
+                                                <BackEase EasingMode="EaseIn"/>
+                                            </EasingColorKeyFrame.EasingFunction>
+                                        </EasingColorKeyFrame>
+                                    </ColorAnimationUsingKeyFrames>
+                                    <DoubleAnimationUsingKeyFrames EnableDependentAnimation="True" Storyboard.TargetProperty="(Control.Background).(GradientBrush.GradientStops)[3].(GradientStop.Offset)" Storyboard.TargetName="cButtonLAG">
+                                        <EasingDoubleKeyFrame KeyTime="0" Value="0.32"/>
+                                        <EasingDoubleKeyFrame KeyTime="0:0:3" Value="0.1">
                                             <EasingDoubleKeyFrame.EasingFunction>
-                                                <BackEase EasingMode="EaseOut"/>
+                                                <BackEase EasingMode="EaseIn"/>
                                             </EasingDoubleKeyFrame.EasingFunction>
                                         </EasingDoubleKeyFrame>
-                                        </DoubleAnimationUsingKeyFrames>
-                                    <DoubleAnimationUsingKeyFrames EnableDependentAnimation="True" Storyboard.TargetProperty="(Control.Background).(GradientBrush.GradientStops)[1].(GradientStop.Offset)" Storyboard.TargetName="cButtonLAG">
-                                            <EasingDoubleKeyFrame KeyTime="0:0:2" Value="0.1">
-                                                <EasingDoubleKeyFrame.EasingFunction>
-                                                    <BackEase EasingMode="EaseOut"/>
-                                                </EasingDoubleKeyFrame.EasingFunction>
-                                            </EasingDoubleKeyFrame>
-                                        </DoubleAnimationUsingKeyFrames>
-                                    <ColorAnimationUsingKeyFrames EnableDependentAnimation="True" Storyboard.TargetProperty="(Control.Background).(GradientBrush.GradientStops)[1].(GradientStop.Color)" Storyboard.TargetName="cButtonLAG">
-                                            <EasingColorKeyFrame KeyTime="0" Value="#CC0BC747"/>
-                                            <EasingColorKeyFrame KeyTime="0:0:2" Value="#CC0BC747"/>
-                                        </ColorAnimationUsingKeyFrames>
-                                    </Storyboard>
+                                    </DoubleAnimationUsingKeyFrames>
+                                    <DoubleAnimationUsingKeyFrames EnableDependentAnimation="True" Storyboard.TargetProperty="(Control.Background).(GradientBrush.GradientStops)[4].(GradientStop.Offset)" Storyboard.TargetName="cButtonLAG">
+                                        <EasingDoubleKeyFrame KeyTime="0" Value="0.68"/>
+                                        <EasingDoubleKeyFrame KeyTime="0:0:3" Value="0.9">
+                                            <EasingDoubleKeyFrame.EasingFunction>
+                                                <BackEase EasingMode="EaseIn"/>
+                                            </EasingDoubleKeyFrame.EasingFunction>
+                                        </EasingDoubleKeyFrame>
+                                    </DoubleAnimationUsingKeyFrames>
+                                    <ColorAnimationUsingKeyFrames EnableDependentAnimation="True" Storyboard.TargetProperty="(Control.Background).(GradientBrush.GradientStops)[3].(GradientStop.Color)" Storyboard.TargetName="cButtonLAG">
+                                        <EasingColorKeyFrame KeyTime="0:0:3" Value="#4200FFB9">
+                                            <EasingColorKeyFrame.EasingFunction>
+                                                <BackEase EasingMode="EaseIn"/>
+                                            </EasingColorKeyFrame.EasingFunction>
+                                        </EasingColorKeyFrame>
+                                    </ColorAnimationUsingKeyFrames>
+                                    <ColorAnimationUsingKeyFrames EnableDependentAnimation="True" Storyboard.TargetProperty="(Control.Background).(GradientBrush.GradientStops)[4].(GradientStop.Color)" Storyboard.TargetName="cButtonLAG">
+                                        <EasingColorKeyFrame KeyTime="0:0:3" Value="#4200FFB9">
+                                            <EasingColorKeyFrame.EasingFunction>
+                                                <BackEase EasingMode="EaseIn"/>
+                                            </EasingColorKeyFrame.EasingFunction>
+                                        </EasingColorKeyFrame>
+                                    </ColorAnimationUsingKeyFrames>
+                                </Storyboard>
                             </Button.Resources>
                         </Button>
 
@@ -169,8 +203,16 @@
                         <Image x:Name="image" Grid.Column="1" HorizontalAlignment="Left" Height="36" Margin="17,5,0,0" VerticalAlignment="Top" Width="36" Source="ms-appx:///Assets/clipboard65.png"/>
                         
                         <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Visible" MaxHeight="335" Background="#7A3A3434" Margin="0,10,0,0">
-                            <TextBlock x:Name="cLogView"  HorizontalAlignment="Center" Height="335" MaxHeight="335"  VerticalAlignment="Center" Width="300" Margin="10,20,10,18"  
-                                       Text="{Binding log, Mode=OneWay}" Foreground="White" FontSize="13.333"/>
+                            <RichTextBlock x:Name="cLogView"  HorizontalAlignment="Center" Height="335" MaxHeight="335"  VerticalAlignment="Center" Width="300" Margin="10,20,10,18" >
+                                <Paragraph>
+                                    <Span>
+                                        <Run Text="{Binding log, Mode=OneWay}" Foreground="{Binding Cor, Mode=OneWay}"  FontSize="13.333"/>
+                                    </Span>
+                                </Paragraph>
+                            </RichTextBlock>
+
+                            <!-- <TextBlock x:Name="cLogView"  HorizontalAlignment="Center" Height="335" MaxHeight="335"  VerticalAlignment="Center" Width="300" Margin="10,20,10,18"  
+                                       Text="{Binding log, Mode=OneWay}" Foreground="White" FontSize="13.333"/> -->
                         </ScrollViewer>
                         <!--  <ListView x:Name="cLogView"  Grid.Row="1" HorizontalAlignment="Center" Height="350"  VerticalAlignment="Center" Width="300" RenderTransformOrigin="0.52,0.59" Background="#33000000" BorderBrush="White" />      -->
                         <Button x:Name="cLimpBt" Content="Limpar" Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="35,0,0,0"  Foreground="White" Background="#33060606"  BorderThickness="2" BorderBrush="#FFFFFFFF" Click="cLimpBt_Click"/>
@@ -179,8 +221,6 @@
                 </DataTemplate>
             </HubSection>
         </Hub>
-        
-
-    </Grid>
+         </Grid>
 </Page>
 
