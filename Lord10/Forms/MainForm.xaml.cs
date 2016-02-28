@@ -71,7 +71,7 @@ namespace Lord10.Forms
 
             Conect_Diag conf = new Conect_Diag();
             await conf.ShowAsync();
-
+            
             /* if (conf.Result == conf.SignInOK)
             {
                 // Sign in was successful.
@@ -93,8 +93,10 @@ namespace Lord10.Forms
         {
             // Zera HubLog.
             //
-            view.log = "";
-            
+            //
+            RichTextBlock log = (sysutils.FindVisualChildlog<RichTextBlock>(MainHub, "cLogView") as RichTextBlock);
+            log.Blocks.Clear();
+
         }
 
         private void displayLog(Paragraph msg)

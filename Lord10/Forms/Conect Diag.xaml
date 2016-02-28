@@ -9,7 +9,7 @@
     Title="Conectando..."
     PrimaryButtonText="Ok"
     SecondaryButtonText="Cancelar"
-    PrimaryButtonClick="ContentDialog_PrimaryButtonClick" x:Name="Diag"
+    PrimaryButtonClick="ContentDialog_PrimaryButtonClick" x:Name="DiagOk"
     SecondaryButtonClick="ContentDialog_SecondaryButtonClick" RequestedTheme="Dark" HorizontalAlignment="Center" VerticalAlignment="Center"  Height="255" Width="235" MinHeight="255">
 
     <StackPanel VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
@@ -19,6 +19,9 @@
 
         <TextBlock x:Name="MesgGlob" Margin="0,5,0,5" HorizontalAlignment="Center"  Text="" FontSize="16" TextWrapping="WrapWholeWords" 
          MaxWidth="225" Height="90" Visibility="Collapsed" />
+        
+        <TextBlock x:Name="MesgGlob2" Margin="0,0,0,0" HorizontalAlignment="Center" VerticalAlignment="Bottom" Text="" FontSize="14" TextWrapping="WrapWholeWords" 
+         MaxWidth="225" Height="40" Visibility="Collapsed" />
 
     </StackPanel>
 

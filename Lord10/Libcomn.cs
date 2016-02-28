@@ -5,14 +5,20 @@ using System.Text;
 using System.Net;
 using System.Threading.Tasks;
 using System.Diagnostics;
+using Windows.UI.Text;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Controls;
 using System.Net.Sockets;
 using System.Net.Http;
+using Windows.Networking;
 using Windows.Networking.Sockets;
 using Windows.UI;
 using Windows.UI.Xaml.Documents;
+using System.IO;
+using Lord10.DataTypes;
+
+
 
 namespace Lord10
 {
@@ -24,6 +30,25 @@ namespace Lord10
 
         Windows.Storage.ApplicationDataContainer LocalSettings = Windows.Storage.ApplicationData.Current.LocalSettings;
         Windows.Storage.StorageFolder localfolder = Windows.Storage.ApplicationData.Current.LocalFolder;
+
+        
+        
+
+        static public Run printRunRTF(string str, Color Cor, int tipo)
+        {
+            // Paragraph Login = new Paragraph();
+            Run run = new Run();
+            run.Foreground = new SolidColorBrush(Cor);
+            run.Text = str;
+            run.FontSize = 13.333;
+            if (tipo != 0 )
+            {
+                run.FontWeight = FontWeights.SemiBold;
+            }
+            return run;
+        }
+
+       // static public void message
 
         ///
         ///
@@ -77,7 +102,7 @@ namespace Lord10
             return null;
         }
 
-
+        
 
         public string Get_stored_IP(int parametro)
         {
@@ -249,20 +274,34 @@ namespace Lord10
 
     public class Comn
     {
-        //  HostName ip = new HostName("192.168.1.2");
+
+
+        //************************************************
+        /// <summary>
+        ///  Bloco de Definições Web Socket
+        /// </summary>
+
+        private const string PortComm = "1020";   // Porta para comunicação
+
+        private StreamSocket LocalSok; // Socket de Comunicação
+        private HostName IpScocket; // Ip de comunicação
+        private Stream streamOut;
+        private Stream streamIn;
+
+        //        private MessageWebSocket msgSock;
+
+
+        ///////////////////////////////////////////////////////
+
         private string _ipdef;
         private bool _active;
 
-        private Socket webSock;          // <summary>
-        private MessageWebSocket msgSock;
+        private generics.connect _isconected;
 
-        private HttpClient client;
-
-
-        
-        public bool IsConnected{
-                                     get;
-                               }
+        public generics.connect IsConnected {
+            get { return this._isconected; }
+            
+        }
         protected string textmsg;
         public delegate void logMsg(Paragraph msg);
         public event logMsg event_log;
@@ -271,100 +310,109 @@ namespace Lord10
         public event Color_log event_log_color;
 
         public Comn() {
-                        IsConnected = false;
-                        }
-        
+            _isconected = generics.connect.idle;
+        }
+
 
         public void SetIp(string par)
         {
             _ipdef = par;
         }
 
-
-        public virtual void Connect()
+        public async Task<int> ConnectAsync()
         {
+            if (event_log != null)
+            {
+                this.event_log_color(Colors.DarkGreen);
+
+                Paragraph Login = new Paragraph();
+                Run run = new Run();
+                run.Foreground = new SolidColorBrush(Windows.UI.Colors.Yellow);
+                run.FontSize = 13.333;
+                run.Text = textmsg;
+
+                Run Complemento = new Run();
+                DateTime Hoje = DateTime.Now;
+                string strl = "_init():: Conect() dispatched as " + Hoje.ToString("T") + " " + Hoje.ToString("d") + "\n";
+                Complemento.Text = strl;
+                Complemento.FontSize = 13.333;
+                Complemento.Foreground = new SolidColorBrush(Windows.UI.Colors.White);
+
+                Login.Inlines.Add(run);
+                Login.Inlines.Add(Complemento);
+
+                this.event_log(Login);
+
+            }
+
+
+            ///
+            /// Inicialização de Rede
+            /// 
+            IpScocket = new HostName(_ipdef); // Aponta Para endereço IP dos Mindstorms
+            LocalSok = new StreamSocket();
+
+            ///  Conexão
+            ///  
+
             try
             {
-                if (event_log != null)
+
+                //                Debug.WriteLine("Tentativa de Conexão" + (DateTime.Now).ToString("T") );
+
+                await LocalSok.ConnectAsync(IpScocket, PortComm);
+                streamOut = LocalSok.OutputStream.AsStreamForWrite();
+                StreamWriter writer = new StreamWriter(streamOut);
+                string outmsg = "handshake";
+
+                await writer.WriteLineAsync(outmsg);
+                await writer.FlushAsync();
+
+                //Espera dados do mindstorms ...
+                streamIn = LocalSok.InputStream.AsStreamForRead();
+                StreamReader reader = new StreamReader(streamIn);
+                string response = await reader.ReadLineAsync();
+                if (response == "MINDSTORMS")
                 {
-                    this.event_log_color(Colors.DarkGreen);
-
-                    Paragraph Login = new Paragraph();
-                    Run run = new Run();
-                    run.Foreground = new SolidColorBrush(Windows.UI.Colors.Yellow);
-                    run.FontSize = 13.333;
-                    run.Text = textmsg;
-
-                    Run Complemento = new Run();
-                    DateTime Hoje = DateTime.Now;
-                    string strl = "_init():: Conect() dispatched as " + Hoje.ToString("T") + " " + Hoje.ToString("d") + "\n";
-                    Complemento.Text = strl;
-                    Complemento.FontSize = 13.333;
-                    Complemento.Foreground = new SolidColorBrush(Windows.UI.Colors.White);
-
-                    Login.Inlines.Add(run);
-                    Login.Inlines.Add(Complemento);
-
-                    this.event_log(Login);
-
-                    ///// Histórico de Evento  
-//                    DateTime Hoje = DateTime.Now;
-//                    string strl = "_init():: Conect() dispatched as " + Hoje.ToString("T") + " " + Hoje.ToString("d") + "\n";
-
-//                    this.event_log_color(Colors.White);
-//                    this.event_log(strl);
-
+                    // Aponta o Delegate para listener(escuta) do socket
+                    StreamSocketListener socketListener = new StreamSocketListener();
+                    socketListener.ConnectionReceived += SocketListener_ConnectionReceived;
+                    _isconected = generics.connect.conected;
                 }
-                webSock = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-                //                sck.AcceptAsync()
 
-                //                sck.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReuseAddress, true);
-
-           
             }
-            finally {
+            catch (Exception ex)
+            {
+                //Add code here to handle any exceptions
                 if (event_log != null)
                 {
 
                     Paragraph Login = new Paragraph();
                     Run run = new Run();
-                    run.Foreground = new SolidColorBrush(Windows.UI.Colors.Red);
-                    run.FontSize = 13.333;
-                    run.Text = textmsg;
+                    run = sysutils.printRunRTF(textmsg, Colors.Red, 0 );
 
                     Run Complemento = new Run();
-                    Complemento.Text = "_init():: Conect()";
-                    Complemento.FontSize = 13.333;
-                    Complemento.Foreground = new SolidColorBrush(Windows.UI.Colors.White);
+                    Complemento = sysutils.printRunRTF("_init():: Conect() dispatched as", Colors.White, 0 );
 
                     Run Compl1 = new Run();
-                    Compl1.Foreground = new SolidColorBrush(Windows.UI.Colors.Red);
-                    Compl1.FontSize = 13.333;
-                    Compl1.Text = " FATAL ERROR CONECT ";
+                    Compl1 = sysutils.printRunRTF(" FATAL ERROR CONECT ", Colors.Red, 1 );
 
                     Run Compl2 = new Run();
+                    ///// Histórico de Evento  
                     DateTime Hoje = DateTime.Now;
-                    Compl2.Foreground = new SolidColorBrush(Windows.UI.Colors.White);
-                    Compl2.FontSize = 13.333;
-                    Compl2.Text = " as " + Hoje.ToString("T") + " " + Hoje.ToString("d") + "\n";
+                    Compl2 = sysutils.printRunRTF( ("as " + Hoje.ToString("T") + " " + Hoje.ToString("d") + "\n"), Colors.White, 1);
 
                     Login.Inlines.Add(run);
                     Login.Inlines.Add(Complemento);
                     Login.Inlines.Add(Compl1);
                     Login.Inlines.Add(Compl2);
-
                     this.event_log(Login);
-                    ///// Histórico de Evento  
-                    /*                   DateTime Hoje = DateTime.Now;
-
-                                       string strl = textmsg + "_init():: Conect() FATAL ERROR CONNECT as " + Hoje.ToString("T") + " " + Hoje.ToString("d") + "\n";
-                                       this.event_log_color(Colors.Red);
-                                       this.event_log(strl);   */
-
+                    _isconected = generics.connect.fail;
                 }
-            };
-            
+            }
+            return 0; 
         }
+   
 
 
         public string RetIp()
@@ -385,7 +433,89 @@ namespace Lord10
             _active = act;
         }
 
-    }
+        /// <summary>
+        /// CallBack do Socket de Comunicação
+        /// </summary>
+        /// <param name="parametro"></param>
+        /// <returns></returns>
+        private static void ConnectCallback(IAsyncResult ar)
+        {
+            try
+            {
+                // Retrieve the socket from the state object.
+                Socket client = (Socket)ar.AsyncState;
+
+                // Complete the connection.
+  //              client.EndConnect(ar);
+
+                Debug.WriteLine("Socket connected to {0}",
+                    client.RemoteEndPoint.ToString());
+
+                // Signal that the connection has been made.
+ //               connectDone.Set();
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine(e.ToString());
+            }
+        }
+
+        /// <summary>
+        ///  Send message on IP net
+        /// </summary>
+        /// <param name="str" String Message></param>
+        /// 
+        async public void SendCommand(string str)
+        {
+
+            Stream outStream = LocalSok.OutputStream.AsStreamForWrite();
+            StreamWriter writer = new StreamWriter(outStream);
+            await writer.WriteLineAsync(str);
+            await writer.FlushAsync();
+        }
+
+        /// <summary>
+        ///  "Listener" Escuta a porta do Socket 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="args"></param>
+
+        private async void SocketListener_ConnectionReceived(StreamSocketListener sender,
+            StreamSocketListenerConnectionReceivedEventArgs args)
+        {
+            //Lê uma linha do cliente remoto
+            try
+            {
+                Stream inStream = args.Socket.InputStream.AsStreamForRead();
+                StreamReader reader = new StreamReader(inStream);
+                string request = await reader.ReadLineAsync();
+
+                Paragraph Login = new Paragraph();
+                Run run = new Run();
+                run = sysutils.printRunRTF("Received " + textmsg, Colors.LightGreen, 1);
+
+                Run Complemento = new Run();
+                DateTime Hoje = DateTime.Now;
+                Complemento = sysutils.printRunRTF( ( request+"as " + Hoje.ToString("T") ), Colors.White, 0);
+                
+                Login.Inlines.Add(run);
+                Login.Inlines.Add(Complemento);
+                
+                this.event_log(Login);
+            }
+            catch
+            {
+               
+            }
+        }
+        
+        
+
+    
+
+}
+
+    
 
 
     /*////////////////////////////////////////////////////////////////////////////////////////////////////////////////////    
@@ -399,7 +529,7 @@ namespace Lord10
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////    */
 
 
-    public class RobotLag : Comn
+    public  class RobotLag : Comn
     {
         sysutils Bibli;
         string str;
@@ -424,10 +554,10 @@ namespace Lord10
             Debug.WriteLine("Metodo Destrutor Chamado");
         }
 
-        override public void Connect()
+ /*       override public async void Connect()
         {
             base.Connect();
-        }
+        } */
 
 
         public void SaveSettings()
@@ -478,7 +608,4 @@ namespace Lord10
 
     }
 
-   
-
-
-}
+ }  
