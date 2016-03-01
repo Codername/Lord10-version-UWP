@@ -19,6 +19,9 @@ using System.Diagnostics; // Uso do Writeline DEBUG
 using Windows.UI.Xaml.Media.Animation;
 using Lord10;
 using Windows.UI.Xaml.Documents;
+using Windows.Storage.Pickers;
+using Windows.Storage;
+using Windows.Storage.Provider;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -52,25 +55,18 @@ namespace Lord10.Forms
         async private void AppBarButton_Sync(object sender, RoutedEventArgs e)
         {
 
-            
-
+            Conect_Diag conf = new Conect_Diag();
+            await conf.ShowAsync();
             spinButton.Begin();
 
             Button sb = (sysutils.FindVisualChild<Button>(MainHub, "cButtonLAG") as Button); // Referencia Button OK
-            Display_Animation_Button(sb);
-
-            // sb.Background =(Brush)Resources["BrushPadraoVerdeAtivo"]; // Carrega Resource definido em Styles não esta funbcionando Typecasting
-
-            
-            // sb.Begin();
+            Display_Animation_Button(); // Chamar Rotina para atualizar fundo de Botoes
+            AppBarDisconect.Visibility = Visibility.Visible;
 
 
 
 
-            // Chama Diag
-
-            Conect_Diag conf = new Conect_Diag();
-            await conf.ShowAsync();
+                      
             
             /* if (conf.Result == conf.SignInOK)
             {
@@ -111,49 +107,175 @@ namespace Lord10.Forms
             view.Cor = new SolidColorBrush(cor);
         }
 
-        private void Display_Animation_Button( Button rbutt )
+        private void Display_Animation_Button()
         {
             /// Criação de Gradiente manual
-            LinearGradientBrush BrushPadraoVerdeAtivo = new LinearGradientBrush();
-            BrushPadraoVerdeAtivo.StartPoint = new Point(0.5, 0);
-            BrushPadraoVerdeAtivo.EndPoint = new Point(0.5, 1);
+            /// Bloco de HistoryBoard Desabilitado 
+            ///
 
-            CompositeTransform trans = new CompositeTransform();
-            trans.CenterY = 0.5;
-            trans.CenterX = 0.5;
-            trans.Rotation = 90;
+            /*  LinearGradientBrush BrushPadraoVerdeAtivo = new LinearGradientBrush();
+                BrushPadraoVerdeAtivo.StartPoint = new Point(0.5, 0);
+                BrushPadraoVerdeAtivo.EndPoint = new Point(0.5, 1);
 
-            BrushPadraoVerdeAtivo.RelativeTransform = trans;
-                    // Create and add Gradient stops
-                       GradientStop stop1 = new GradientStop();
-                       stop1.Color = Color.FromArgb(0xDD,0x00,0xF3,0x37);
-                       stop1.Offset = 0.5;
-                       BrushPadraoVerdeAtivo.GradientStops.Add(stop1);
-                       GradientStop stop2 = new GradientStop();
-                       stop2.Color = Color.FromArgb(0x52,0x00,0xFF,0xB9);
-                       stop2.Offset = 1;
-                       BrushPadraoVerdeAtivo.GradientStops.Add(stop2);
-                       GradientStop stop3 = new GradientStop();
-                       stop3.Color = Color.FromArgb(0x52,0x00,0xFF,0xB9);
-                       BrushPadraoVerdeAtivo.GradientStops.Add(stop3);
-                       GradientStop stop4 = new GradientStop();
-                       stop4.Color = Color.FromArgb(0x78,0x00,0xF8,0x71);
-                       stop4.Offset = 0.226;
-                       BrushPadraoVerdeAtivo.GradientStops.Add(stop4);
-                       GradientStop stop5 = new GradientStop();
-                       stop5.Color = Color.FromArgb(0x7A,0x00,0xF8,0x6E);
-                       stop5.Offset = 0.787;
-                       BrushPadraoVerdeAtivo.GradientStops.Add(stop5);
+                CompositeTransform trans = new CompositeTransform();
+                trans.CenterY = 0.5;
+                trans.CenterX = 0.5;
+                trans.Rotation = 90;
 
-            rbutt.Background = BrushPadraoVerdeAtivo;
-             
-                           
-                                              /// Inicializa Storyboard
+                BrushPadraoVerdeAtivo.RelativeTransform = trans;
+                        // Create and add Gradient stops
+                           GradientStop stop1 = new GradientStop();
+                           stop1.Color = Color.FromArgb(0xDD,0x00,0xF3,0x37);
+                           stop1.Offset = 0.5;
+                           BrushPadraoVerdeAtivo.GradientStops.Add(stop1);
+                           GradientStop stop2 = new GradientStop();
+                           stop2.Color = Color.FromArgb(0x52,0x00,0xFF,0xB9);
+                           stop2.Offset = 1;
+                           BrushPadraoVerdeAtivo.GradientStops.Add(stop2);
+                           GradientStop stop3 = new GradientStop();
+                           stop3.Color = Color.FromArgb(0x52,0x00,0xFF,0xB9);
+                           BrushPadraoVerdeAtivo.GradientStops.Add(stop3);
+                           GradientStop stop4 = new GradientStop();
+                           stop4.Color = Color.FromArgb(0x78,0x00,0xF8,0x71);
+                           stop4.Offset = 0.226;
+                           BrushPadraoVerdeAtivo.GradientStops.Add(stop4);
+                           GradientStop stop5 = new GradientStop();
+                           stop5.Color = Color.FromArgb(0x7A,0x00,0xF8,0x6E);
+                           stop5.Offset = 0.787;
+                           BrushPadraoVerdeAtivo.GradientStops.Add(stop5);
 
-                                              Storyboard sbL = (sysutils.FindVisualChild<Button>(MainHub, "cButtonLAG") as Button).Resources["StoryboardOnLag"] as Storyboard;
+                rbutt.Background = BrushPadraoVerdeAtivo;
+
+
+                                                  /// Inicializa Storyboard
+
+                                                  Storyboard sbL = (sysutils.FindVisualChild<Button>(MainHub, "cButtonLAG") as Button).Resources["StoryboardOnLag"] as Storyboard;
+                sbL.Begin(); */
+
+            // Button sbF = (sysutils.FindVisualChild<Button>(MainHub, "cButtonLAG") as Button);
+            //  sbF.Background = new SolidColorBrush(Color.FromArgb(0xBC,0x16,0x9E,0x41));
+            Storyboard sbL = (sysutils.FindVisualChild<Button>(MainHub, "cButtonLAG") as Button).Resources["StoryboardOnLag"] as Storyboard;
             sbL.Begin();
-            Storyboard sbF = (sysutils.FindVisualChild<Button>(MainHub, "cButtonFLAG") as Button).Resources["StoryboardOnFlag"] as Storyboard;
-            sbF.Begin();
+        }
+
+        private void AppBarDisconect_Click(object sender, RoutedEventArgs e)
+        {
+            Button sbF = (sysutils.FindVisualChild<Button>(MainHub, "cButtonLAG") as Button);
+            sbF.Background = new SolidColorBrush(Color.FromArgb(0x33,0x06,0x06,0x06));
+            spinButton.Stop();
+            AppBarDisconect.Visibility = Visibility.Collapsed;
+            Storyboard sbL = (sysutils.FindVisualChild<Button>(MainHub, "cButtonLAG") as Button).Resources["StoryboardOnLag"] as Storyboard;
+            sbL.Stop();
+        }
+
+        private async void Salvar_Click(object sender, RoutedEventArgs e)
+        {
+            RichTextBlock _log = (sysutils.FindVisualChildlog<RichTextBlock>(MainHub, "cLogView") as RichTextBlock);
+            {
+                // Clear previous returned file name, if it exists, between iterations of this scenario
+                
+                FileSavePicker savePicker = new FileSavePicker();
+                savePicker.SuggestedStartLocation = PickerLocationId.DocumentsLibrary;
+                // Dropdown of file types the user can save the file as
+                savePicker.FileTypeChoices.Add("rtf (Rich Text Format)", new List<string>() { ".rtf" });
+                // Default file name if the user does not type one in or select a file to replace
+                DateTime Hoje = DateTime.Now;
+                string str = "Log " + Hoje.ToString("T") + " " + Hoje.ToString("d");
+                               
+                
+                /// Bloco de criação de Content Diag  Hard Coded
+                // *****************************************************************************
+                
+
+                var dialog = new ContentDialog()
+                {
+                    Title = "",
+                    //RequestedTheme = ElementTheme.Dark,
+                    //FullSizeDesired = true,
+                    MaxWidth = this.ActualWidth // Required for Mobile!
+                };
+
+                // Setup Content
+                var panel = new StackPanel();
+
+                dialog.Content = panel;
+                // Add Buttons
+
+                dialog.PrimaryButtonText = "OK";
+                dialog.IsPrimaryButtonEnabled = true;
+
+                //************************************************************************************
+
+                savePicker.SuggestedFileName = str;
+                StorageFile file = await savePicker.PickSaveFileAsync();
+
+                if (file != null)
+                {
+                    // Prevent updates to the remote version of the file until we 
+                    // finish making changes and call CompleteUpdatesAsync.
+
+                    Windows.Storage.CachedFileManager.DeferUpdates(file);
+
+                    // write to file
+
+                    Windows.Storage.Streams.IRandomAccessStream randAccStream =
+                        await file.OpenAsync(Windows.Storage.FileAccessMode.ReadWrite);
+
+                    _log.Document.SaveToStream(Windows.UI.Text.TextGetOptions.FormatRtf, randAccStream);
+
+                    // Let Windows know that we're finished changing the file so the 
+                    // other app can update the remote version of the file.
+                    Windows.Storage.Provider.FileUpdateStatus status = await Windows.Storage.CachedFileManager.CompleteUpdatesAsync(file);
+
+
+
+
+
+
+
+
+
+                    /// await FileIO.WriteTextAsync(file, file.Name);
+                    /// 
+                    // Let Windows know that we're finished changing the file so the other app can update the remote version of the file.
+                    // Completing updates may require Windows to ask for user input.
+
+
+                    FileUpdateStatus status = await CachedFileManager.CompleteUpdatesAsync(file);
+                    if (status == FileUpdateStatus.Complete)
+                    {
+                        panel.Children.Add(new TextBlock
+                        {
+                            Text = "Arquivo " + file.Name + " foi salvo com sucesso.",
+                            TextWrapping = TextWrapping.Wrap,
+                        });
+                        // Show Dialog
+
+                        var result = await dialog.ShowAsync();
+                    }
+                    else
+                    {
+                        panel.Children.Add(new TextBlock
+                        {
+                            Text = "Arquivo " + file.Name + " não pode ser salvo.",
+                            TextWrapping = TextWrapping.Wrap,
+                        });
+                        // Show Dialog
+
+                        var result = await dialog.ShowAsync();
+                    }
+                }
+                else
+                {
+             /*       panel.Children.Add(new TextBlock
+                    {
+                        Text = ("Operação Cancelada."),
+                        TextWrapping = TextWrapping.Wrap
+                    });
+                   // Show Dialog
+                    var result = await dialog.ShowAsync();  */
+                }
+            }
         }
     }
      

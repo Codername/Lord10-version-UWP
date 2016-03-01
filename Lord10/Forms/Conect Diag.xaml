@@ -9,7 +9,7 @@
     Title="Conectando..."
     PrimaryButtonText="Ok"
     SecondaryButtonText="Cancelar"
-    PrimaryButtonClick="ContentDialog_PrimaryButtonClick" x:Name="DiagOk"
+    PrimaryButtonClick="ContentDialog_PrimaryButtonClick" x:Name="Diag"
     SecondaryButtonClick="ContentDialog_SecondaryButtonClick" RequestedTheme="Dark" HorizontalAlignment="Center" VerticalAlignment="Center"  Height="255" Width="235" MinHeight="255">
 
     <StackPanel VerticalAlignment="Stretch" HorizontalAlignment="Stretch">

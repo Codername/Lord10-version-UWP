@@ -64,10 +64,10 @@ namespace Lord10.Forms
             {
                 ProgreesTemp.Visibility = Visibility.Collapsed;
                 this.Label_Status.Text = "";
-                MesgGlob.Text = " Não Houve Resposta de Lag... ";
+                MesgGlob.Text = " Não Houve Resposta de Lag. ";
                 MesgGlob.FontSize = 14;
                 MesgGlob.Height = 40;
-                MesgGlob2.Text = "Deseja tentar uma nova conexão ?";
+                MesgGlob2.Text = "Deseja realizar uma nova conexão ?";
 
                 MesgGlob.Visibility = Visibility.Visible;
                 MesgGlob2.Visibility = Visibility.Visible;
@@ -75,6 +75,20 @@ namespace Lord10.Forms
                 PrimaryButtonText = "Sim";
                 SecondaryButtonText = "Não";
                 IsPrimaryButtonEnabled = true;
+            }
+            else
+            {
+                this.Hide(); // Verificar a disponibilidade
+
+                /*              ProgreesTemp.Visibility = Visibility.Collapsed;
+                                this.Label_Status.Text = "";
+                                MesgGlob.Text = " LAG foi conectado ! ";
+                                MesgGlob.FontSize = 14;
+                                MesgGlob.Height = 80;
+                                PrimaryButtonText = "Ok";
+                                IsPrimaryButtonEnabled = true;
+                                IsSecondaryButtonEnabled = false; */
+
             }
         }
 
@@ -89,7 +103,6 @@ namespace Lord10.Forms
                 this.Label_Status.Text = "Conectando Lag... Isso pode demorar...";
                 ProgreesTemp.Visibility = Visibility.Visible;
                 _process();
-
                 args.Cancel = true; // Evita fechamento do Dialogo
             }
         }

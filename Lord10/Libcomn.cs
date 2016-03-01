@@ -78,7 +78,7 @@ namespace Lord10
 
 
         /// <summary>
-        ///  Override de Metodo para localizar Rich Text
+        ///  Override de Metodo para localizar Rich Text Control em tempo de execução
         /// </summary>
         /// <param name="parametro"></param>
         /// <returns></returns>
