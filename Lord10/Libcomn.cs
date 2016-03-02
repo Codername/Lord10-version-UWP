@@ -413,7 +413,37 @@ namespace Lord10
             return 0; 
         }
    
+        
 
+        public void genericMove(generics.singleMovement mov )
+        {
+               switch (mov){
+
+                case generics.singleMovement.stop:
+                                                     _send("AB_STOP");
+                                                     break;
+                case generics.singleMovement.forward:
+                                                     _send("AB_ROTATE");
+                                                     break;
+                case generics.singleMovement.rear:
+                                                     _send("AB_INVERSE ROTATE");
+                                                     break;
+                case generics.singleMovement.left:
+                                                     _send("B_ALTERNATE");
+                                                     break;
+                case generics.singleMovement.right:
+                                                     _send("A_ALTERNATE");
+                                                     break;
+            }
+        }
+
+        private async void _send( string strOut)
+        {
+            StreamWriter writer = new StreamWriter(streamOut);
+            await writer.WriteLineAsync(strOut);
+            await writer.FlushAsync();
+
+        }
 
         public string RetIp()
         {

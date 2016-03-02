@@ -64,7 +64,7 @@ namespace Lord10.Forms
             {
                 ProgreesTemp.Visibility = Visibility.Collapsed;
                 this.Label_Status.Text = "";
-                MesgGlob.Text = " Não Houve Resposta de Lag. ";
+                MesgGlob.Text = " Não Houve Resposta de LAG. ";
                 MesgGlob.FontSize = 14;
                 MesgGlob.Height = 40;
                 MesgGlob2.Text = "Deseja realizar uma nova conexão ?";

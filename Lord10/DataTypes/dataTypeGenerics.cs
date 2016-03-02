@@ -14,6 +14,14 @@ namespace Lord10.DataTypes
             conected = 2,
             fail = 3,
         }
-
+        public enum singleMovement
+        {
+            idle = 1,
+            forward = 2,
+            stop = 3,
+            rear = 4,
+            left = 5,
+            right = 6,
+        }
     }
 }

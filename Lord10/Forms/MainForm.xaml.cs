@@ -22,6 +22,7 @@ using Windows.UI.Xaml.Documents;
 using Windows.Storage.Pickers;
 using Windows.Storage;
 using Windows.Storage.Provider;
+using Lord10.DataTypes;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -33,6 +34,7 @@ namespace Lord10.Forms
     public sealed partial class MainForm : Page
     {
         private ViewControlMainPage view;
+        private RobotLag _LAG;
         public MainForm()
         {
             
@@ -45,9 +47,14 @@ namespace Lord10.Forms
                 log = "",
                 Cor = new SolidColorBrush(Colors.White)
             };
+            //// Set de variáveis globais e privates
+
             this.DataContext = view;
             ((App)Application.Current).LAG.event_log += displayLog;
             ((App)Application.Current).LAG.event_log_color += displaycolorLog;
+            _LAG = ((App)Application.Current).LAG;
+
+        //// *********************************************************************************************************************
       //      ((App)Application.Current).FLAG.event_log += displayLog;
         }
 
@@ -171,9 +178,12 @@ namespace Lord10.Forms
         private async void Salvar_Click(object sender, RoutedEventArgs e)
         {
             RichTextBlock _log = (sysutils.FindVisualChildlog<RichTextBlock>(MainHub, "cLogView") as RichTextBlock);
+            _log.SelectAll();
+            string TXT = _log.SelectedText;
+            if (TXT != "")
             {
                 // Clear previous returned file name, if it exists, between iterations of this scenario
-                
+
                 FileSavePicker savePicker = new FileSavePicker();
                 savePicker.SuggestedStartLocation = PickerLocationId.DocumentsLibrary;
                 // Dropdown of file types the user can save the file as
@@ -181,16 +191,16 @@ namespace Lord10.Forms
                 // Default file name if the user does not type one in or select a file to replace
                 DateTime Hoje = DateTime.Now;
                 string str = "Log " + Hoje.ToString("T") + " " + Hoje.ToString("d");
-                               
-                
+
+
                 /// Bloco de criação de Content Diag  Hard Coded
                 // *****************************************************************************
-                
+
 
                 var dialog = new ContentDialog()
                 {
                     Title = "",
-                    //RequestedTheme = ElementTheme.Dark,
+                    RequestedTheme = ElementTheme.Dark,
                     //FullSizeDesired = true,
                     MaxWidth = this.ActualWidth // Required for Mobile!
                 };
@@ -213,35 +223,24 @@ namespace Lord10.Forms
                 {
                     // Prevent updates to the remote version of the file until we 
                     // finish making changes and call CompleteUpdatesAsync.
+                    // write to file
 
                     Windows.Storage.CachedFileManager.DeferUpdates(file);
 
-                    // write to file
-
-                    Windows.Storage.Streams.IRandomAccessStream randAccStream =
-                        await file.OpenAsync(Windows.Storage.FileAccessMode.ReadWrite);
-
-                    _log.Document.SaveToStream(Windows.UI.Text.TextGetOptions.FormatRtf, randAccStream);
-
                     // Let Windows know that we're finished changing the file so the 
                     // other app can update the remote version of the file.
-                    Windows.Storage.Provider.FileUpdateStatus status = await Windows.Storage.CachedFileManager.CompleteUpdatesAsync(file);
 
 
+                    await FileIO.WriteTextAsync(file, TXT);
 
-
-
-
-
-
-
-                    /// await FileIO.WriteTextAsync(file, file.Name);
                     /// 
                     // Let Windows know that we're finished changing the file so the other app can update the remote version of the file.
                     // Completing updates may require Windows to ask for user input.
 
 
-                    FileUpdateStatus status = await CachedFileManager.CompleteUpdatesAsync(file);
+                    Windows.Storage.Provider.FileUpdateStatus status = await Windows.Storage.CachedFileManager.CompleteUpdatesAsync(file);
+
+
                     if (status == FileUpdateStatus.Complete)
                     {
                         panel.Children.Add(new TextBlock
@@ -267,16 +266,48 @@ namespace Lord10.Forms
                 }
                 else
                 {
-             /*       panel.Children.Add(new TextBlock
-                    {
-                        Text = ("Operação Cancelada."),
-                        TextWrapping = TextWrapping.Wrap
-                    });
-                   // Show Dialog
-                    var result = await dialog.ShowAsync();  */
+                    /*       panel.Children.Add(new TextBlock
+                           {
+                               Text = ("Operação Cancelada."),
+                               TextWrapping = TextWrapping.Wrap
+                           });
+                          // Show Dialog
+                           var result = await dialog.ShowAsync();  */
                 }
             }
         }
+
+        private async void moveRobot(generics.singleMovement mov, string str )
+        {
+            Paragraph msg = new Paragraph();
+
+            Run run = new Run();
+
+            run = sysutils.printRunRTF("Send LAG :", Colors.Yellow, 1);
+            Run Compl2 = new Run();
+            DateTime Hoje = DateTime.Now;
+            Compl2 = sysutils.printRunRTF((str+" as " + Hoje.ToString("T") + "\n"), Colors.White, 0);
+
+            msg.Inlines.Add(run);
+            msg.Inlines.Add(Compl2);
+
+            displayLog(msg);
+
+            ///// Comando de Movimentação
+            _LAG.genericMove(mov);
+
+        }
+
+        private void ButtonStop_Click(object sender, RoutedEventArgs e)
+        {
+            if(_LAG.IsConnected == generics.connect.conected)
+            {
+                moveRobot(generics.singleMovement.stop, "Stop A & B Motors");
+            }
+        }
+
+
     }
+   }
      
-}
+

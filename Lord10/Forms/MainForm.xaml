@@ -80,7 +80,7 @@
 
                         </Rectangle>
                         <Button x:Name="ButtonStop" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center"  VerticalAlignment="Center" Height="110"  Width="110"
-                                 Foreground="White" BorderThickness="2" BorderBrush="#FFFFFFFF">
+                                 Foreground="White" BorderThickness="2" BorderBrush="#FFFFFFFF" Click="ButtonStop_Click">
                             <Button.Background>
                                 <ImageBrush Stretch="Uniform" ImageSource="ms-appx:///Assets/Stop.png"/>
                             </Button.Background>
