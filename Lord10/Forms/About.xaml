@@ -22,6 +22,11 @@
             </c:PageHeader.HeaderContent>
         </c:PageHeader>
         <Hub x:Name="cMainHub" Margin="0,48,0,0">
+            <Hub.Transitions>
+                <TransitionCollection>
+                    <EdgeUIThemeTransition Edge="Right"/>
+                </TransitionCollection>
+            </Hub.Transitions>
             <HubSection VerticalContentAlignment="Stretch">
                 <DataTemplate>
                     <Grid>
@@ -36,7 +41,7 @@
                 </DataTemplate>
             </HubSection>
             <HubSection VerticalContentAlignment="Stretch">
-                <DataTemplate>
+                 <DataTemplate>
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*"/>

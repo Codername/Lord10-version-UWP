@@ -17,11 +17,96 @@ using Windows.UI;
 using Windows.UI.Xaml.Documents;
 using System.IO;
 using Lord10.DataTypes;
-
-
+using Windows.Foundation;
 
 namespace Lord10
 {
+
+
+    public static class HubExtensions
+    {
+        public static async Task ScrollToSectionAnimated(this Hub hub, HubSection section)
+        {
+            // Find the internal scrollviewer and its current horizontal offset.
+
+            // var viewer = hub.GetsDescendantOfType<ScrollViewer>();
+           ScrollViewer viewer = FindChild<ScrollViewer>(hub, "ScrollViewer");
+
+ 
+            var current = viewer.HorizontalOffset;
+
+            // Find the distance to scroll.
+            var visual = section.TransformToVisual(hub);
+            var point = visual.TransformPoint(new Point(0, 0));
+            var offset = point.X;
+
+            // Scroll in a more or less animated way.
+            var increment = offset / 24;
+            for (int i = 1; i < 25; i++)
+            {
+                viewer.ChangeView((i * increment) + current, null, null, true);
+                await Task.Delay(TimeSpan.FromMilliseconds(i * 5));
+            }
+        }
+
+
+   
+        /// <summary>
+        ///  Pesquisa Visual Tree por Nome
+        ///  Sample FindChild<TextBox>(Application.Current.MainWindow, "myTextBoxName");
+        ///  
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="parent"></param>
+        /// <param name="childName"></param>
+        /// <returns></returns>
+
+        public static T FindChild<T>(DependencyObject parent, string childName)
+   where T : DependencyObject
+        {
+            // Confirm parent and childName are valid. 
+            if (parent == null) return null;
+
+            T foundChild = null;
+
+            int childrenCount = VisualTreeHelper.GetChildrenCount(parent);
+            for (int i = 0; i < childrenCount; i++)
+            {
+                var child = VisualTreeHelper.GetChild(parent, i);
+                // If the child is not of the request child type child
+                T childType = child as T;
+                if (childType == null)
+                {
+                    // recursively drill down the tree
+                    foundChild = FindChild<T>(child, childName);
+
+                    // If the child is found, break so we do not overwrite the found child. 
+                    if (foundChild != null) break;
+                }
+                else if (!string.IsNullOrEmpty(childName))
+                {
+                    var frameworkElement = child as FrameworkElement;
+                    // If the child's name is set for search
+                    if (frameworkElement != null && frameworkElement.Name == childName)
+                    {
+                        // if the child's name is of the request name
+                        foundChild = (T)child;
+                        break;
+                    }
+                }
+                else
+                {
+                    // child element found.
+                    foundChild = (T)child;
+                    break;
+                }
+            }
+
+            return foundChild;
+        }
+
+    }
+
     class sysutils
     {
 
@@ -31,8 +116,6 @@ namespace Lord10
         Windows.Storage.ApplicationDataContainer LocalSettings = Windows.Storage.ApplicationData.Current.LocalSettings;
         Windows.Storage.StorageFolder localfolder = Windows.Storage.ApplicationData.Current.LocalFolder;
 
-        
-        
 
         static public Run printRunRTF(string str, Color Cor, int tipo)
         {

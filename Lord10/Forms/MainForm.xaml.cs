@@ -245,7 +245,7 @@ namespace Lord10.Forms
                     {
                         panel.Children.Add(new TextBlock
                         {
-                            Text = "Arquivo :" + file.Name + " foi salvo com sucesso.",
+                            Text = "Arquivo: " + file.Name + " foi salvo com sucesso.",
                             TextWrapping = TextWrapping.Wrap,
                         });
                         // Show Dialog

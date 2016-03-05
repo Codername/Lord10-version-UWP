@@ -109,7 +109,7 @@
                         <Button
                             x:Name="cButtonLAG" Content="Lag" Grid.Row="3" Grid.Column="0" HorizontalAlignment="Left" Width="70" Margin="35,0,0,0"  VerticalAlignment="Top" Background="#33060606" Grid.RowSpan="2" Grid.ColumnSpan="2" Foreground="White" BorderThickness="1" BorderBrush="#FFFFFFFF" >
                             <Button.Resources>
-                              <Storyboard x:Name="StoryboardOnLag" RepeatBehavior="Forever" AutoReverse="True">
+                                <Storyboard x:Name="StoryboardOnLag" BeginTime="00:00:00"  RepeatBehavior="Forever" AutoReverse="True">
                                     <ColorAnimation Duration="0:0:1.5" To="#BC169E41" Storyboard.TargetProperty="(Control.Background).(SolidColorBrush.Color)" Storyboard.TargetName="cButtonLAG" d:IsOptimized="True">
                                     <ColorAnimation.EasingFunction>
                                             <QuinticEase EasingMode="EaseOut"/>
