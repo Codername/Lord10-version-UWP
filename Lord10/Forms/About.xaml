@@ -11,17 +11,17 @@
         <CommandBar RequestedTheme="Dark">
             <AppBarButton Icon="Accept" Click="AppBarButton_Click" />
         </CommandBar>
-      </Page.BottomAppBar>
+    </Page.BottomAppBar>
     <Grid>
-             <Grid.Background>
-                <ImageBrush Stretch="Fill" ImageSource="ms-appx:///Assets/About.png"/>
-            </Grid.Background>
-            <c:PageHeader x:Name="pageHeader">
+        <Grid.Background>
+            <ImageBrush Stretch="Fill" ImageSource="ms-appx:///Assets/About.png"/>
+        </Grid.Background>
+        <c:PageHeader x:Name="pageHeader">
             <c:PageHeader.HeaderContent>
                 <TextBlock x:Name="title" Style="{ThemeResource PageTitleTextBlockStyle}" Text="About..."/>
             </c:PageHeader.HeaderContent>
         </c:PageHeader>
-        <Hub Margin="0,48,0,0">
+        <Hub x:Name="cMainHub" Margin="0,48,0,0">
             <HubSection VerticalContentAlignment="Stretch">
                 <DataTemplate>
                     <Grid>
@@ -31,12 +31,12 @@
                             <RowDefinition Height="2*"/>
                         </Grid.RowDefinitions>
                         <Image  Grid.Row="1"  Height="139" Margin="0,0,0,0" VerticalAlignment="Center" Width="310" RenderTransformOrigin="0.421,-0.275" Source="ms-appx:///Assets/Logo App About.png"/>
-                        
+
                     </Grid>
                 </DataTemplate>
             </HubSection>
             <HubSection VerticalContentAlignment="Stretch">
-                 <DataTemplate>
+                <DataTemplate>
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*"/>

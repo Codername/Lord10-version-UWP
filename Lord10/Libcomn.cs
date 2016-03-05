@@ -220,8 +220,6 @@ namespace Lord10
 
         public void Store_Robot_active(bool act, int par)
         {
-            object ret;
-
             if (par == 0)
             {
                 LocalSettings.Values​​["active_lag"] = act;

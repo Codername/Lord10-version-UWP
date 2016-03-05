@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.ComponentModel;
 using Windows.UI;
 using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Controls;
 
 namespace Lord10.Forms
 {
@@ -39,7 +40,7 @@ namespace Lord10.Forms
 
         protected virtual void OnPropertyChanged(string propertyName)
         {
-            if(PropertyChanged != null)
+            if (PropertyChanged != null)
             {
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
             }
@@ -47,3 +48,6 @@ namespace Lord10.Forms
 
     }
 }
+
+
+ 
