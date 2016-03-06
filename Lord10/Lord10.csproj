@@ -96,6 +96,12 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\CircularSliderControl\CircularSliderControl.cs" />
+    <Compile Include="Controls\CircularSliderControl\IGeometryHelper.cs" />
+    <Compile Include="Controls\CircularSliderControl\IMathHelper.cs" />
+    <Compile Include="Controls\CircularSliderControl\PadMinutesConverter.cs" />
+    <Compile Include="Controls\CircularSliderControl\PercentageConverter.cs" />
+    <Compile Include="Controls\Dial.cs" />
     <Compile Include="Controls\NavMenuListView.cs" />
     <Compile Include="Controls\PageHeader.xaml.cs">
       <DependentUpon>PageHeader.xaml</DependentUpon>
@@ -144,6 +150,7 @@
     <Content Include="Assets\1982669.png" />
     <Content Include="Assets\1984247.jpg" />
     <Content Include="Assets\About.png" />
+    <Content Include="Assets\Arm.png" />
     <Content Include="Assets\Arrow.png" />
     <Content Include="Assets\clipboard65.png" />
     <Content Include="Assets\Controle Remoto transparante x100.png" />
@@ -159,6 +166,8 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Assets\StoreLogo.scale-100.png" />
+    <Content Include="Assets\W mobile Signal .png" />
+    <Content Include="Assets\W10 Mobile.png" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />
@@ -197,6 +206,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Styles\Styles.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\Generic.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

@@ -26,9 +26,9 @@ namespace Lord10.Forms
         private RobotLag _LAG;
         private RobotFlag _FLAG;
 
-          public Conect_Diag()
+         public Conect_Diag()
         {
-            this.InitializeComponent();
+            InitializeComponent();
             this.IsPrimaryButtonEnabled = false;
             _LAG  = ((App)Application.Current).LAG;
             _FLAG = ((App)Application.Current).FLAG;

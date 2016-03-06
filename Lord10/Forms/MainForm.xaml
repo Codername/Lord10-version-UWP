@@ -1,18 +1,19 @@
 ﻿<Page
-    x:Class="Lord10.Forms.MainForm"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:Lord10.Forms"
     xmlns:c="using:Lord10.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d">
+    xmlns:CircularSlider="using:Lord10.Controls.CircularSlider" x:Name="MainDisp"
+    x:Class="Lord10.Forms.MainForm"
+    mc:Ignorable="d" Unloaded="MainDisp_Unloaded">
 
     <Page.Resources>
         <Storyboard x:Name="spinButton">
             <DoubleAnimation To="360" RepeatBehavior="Forever" 
-         Storyboard.TargetName="AppBarConnect"
-         Storyboard.TargetProperty="(AppBarButton.Icon).(SymbolIcon.RenderTransform).(CompositeTransform.Rotation)" />
+        		Storyboard.TargetName="AppBarConnect"
+        		Storyboard.TargetProperty="(AppBarButton.Icon).(SymbolIcon.RenderTransform).(CompositeTransform.Rotation)" />
         </Storyboard>
 
     </Page.Resources>
@@ -39,12 +40,10 @@
             </c:PageHeader.HeaderContent>
         </c:PageHeader>
 
-        <Hub Name="MainHub" Margin="0,48,0,0" >
+        <Hub x:Name="MainHub" Margin="0,48,0,0" >
             <HubSection VerticalContentAlignment="Stretch" HorizontalAlignment="Stretch" Width="357">
                 <DataTemplate>
-                    <Grid Name="RemoteControl" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="349">
-                        <Grid.Resources>
-                        </Grid.Resources>
+                    <Grid x:Name="RemoteControl" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="349">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="2*"/>
                             <RowDefinition Height="12*"/>
@@ -62,7 +61,7 @@
 
 
                         <TextBlock x:Name="textBlock" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Controle Remoto" VerticalAlignment="Top" Grid.ColumnSpan="2" Width="240" Grid.Column="1" Margin="58,6,0,0" Foreground="White" FontSize="24"/>
-                        <Image x:Name="image" Grid.Column="1" HorizontalAlignment="Left" Height="36" Margin="14,4,0,0" VerticalAlignment="Top" Width="36" Source="ms-appx:///Assets/Controle Remoto transparante x100.png"/>
+                        <Image x:Name="image" Grid.Column="1" HorizontalAlignment="Left" Height="34" Margin="08,8,0,0" VerticalAlignment="Top" Width="45" Source="ms-appx:///Assets/W mobile Signal .png"/>
 
 
 
@@ -80,7 +79,7 @@
 
                         </Rectangle>
                         <Button x:Name="ButtonStop" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center"  VerticalAlignment="Center" Height="110"  Width="110"
-                                 Foreground="White" BorderThickness="2" BorderBrush="#FFFFFFFF" Click="ButtonStop_Click">
+							Foreground="White" BorderThickness="2" BorderBrush="#FFFFFFFF" Click="ButtonStop_Click">
                             <Button.Background>
                                 <ImageBrush Stretch="Uniform" ImageSource="ms-appx:///Assets/Stop.png"/>
                             </Button.Background>
@@ -107,17 +106,17 @@
                             <Image Source="ms-appx:///Assets/Arrow.png" Stretch="Fill" />
                         </Button>
                         <Button
-                            x:Name="cButtonLAG" Content="Lag" Grid.Row="3" Grid.Column="0" HorizontalAlignment="Left" Width="70" Margin="35,0,0,0"  VerticalAlignment="Top" Background="#33060606" Grid.RowSpan="2" Grid.ColumnSpan="2" Foreground="White" BorderThickness="1" BorderBrush="#FFFFFFFF" >
+							x:Name="cButtonLAG" Content="Lag" Grid.Row="3" Grid.Column="0" HorizontalAlignment="Left" Width="70" Margin="35,0,0,0"  VerticalAlignment="Top" Background="#33060606" Grid.RowSpan="2" Grid.ColumnSpan="2" Foreground="White" BorderThickness="1" BorderBrush="#FFFFFFFF" >
                             <Button.Resources>
                                 <Storyboard x:Name="StoryboardOnLag" BeginTime="00:00:00"  RepeatBehavior="Forever" AutoReverse="True">
                                     <ColorAnimation Duration="0:0:1.5" To="#BC169E41" Storyboard.TargetProperty="(Control.Background).(SolidColorBrush.Color)" Storyboard.TargetName="cButtonLAG" d:IsOptimized="True">
-                                    <ColorAnimation.EasingFunction>
+                                        <ColorAnimation.EasingFunction>
                                             <QuinticEase EasingMode="EaseOut"/>
-                                    </ColorAnimation.EasingFunction>
-                                 </ColorAnimation>
-                              </Storyboard>
-                                    
-                                    <!--  <Storyboard x:Name="StoryboardOnLag" RepeatBehavior="Forever" AutoReverse="True">
+                                        </ColorAnimation.EasingFunction>
+                                    </ColorAnimation>
+                                </Storyboard>
+
+                                <!--  <Storyboard x:Name="StoryboardOnLag" RepeatBehavior="Forever" AutoReverse="True">
                                     <ColorAnimationUsingKeyFrames EnableDependentAnimation="True" Storyboard.TargetProperty="(Control.Background).(GradientBrush.GradientStops)[1].(GradientStop.Color)" Storyboard.TargetName="cButtonLAG">
                                         <EasingColorKeyFrame KeyTime="0:0:3" Value="#A500F337">
                                             <EasingColorKeyFrame.EasingFunction>
@@ -171,7 +170,7 @@
                                         </EasingColorKeyFrame>
                                     </ColorAnimationUsingKeyFrames>
                                 </Storyboard> -->
-                                    
+
                             </Button.Resources>
                         </Button>
 
@@ -191,9 +190,67 @@
 
                 </DataTemplate>
             </HubSection>
-            <HubSection Header="HubSection 1">
+            <HubSection VerticalContentAlignment="Stretch" HorizontalAlignment="Stretch" Width="357">
                 <DataTemplate>
-                    <Grid>
+                    <Grid x:Name="ArmControl" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="349">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="2*"/>
+                            <RowDefinition Height="12*"/>
+                            <RowDefinition Height="3*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="9*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Rectangle Grid.ColumnSpan="3" HorizontalAlignment="Left" Height="48" Margin="13,0,0,0" Stroke="Transparent" VerticalAlignment="Top" Width="305" Fill="#3F000000"/>
+                        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Atuador Mecânico" VerticalAlignment="Top" Grid.ColumnSpan="2" Width="240" Grid.Column="1" Margin="58,6,0,0" Foreground="White" FontSize="24"/>
+                        <Image x:Name="image" Grid.Column="1" HorizontalAlignment="Left" Height="36" Margin="14,4,0,0" VerticalAlignment="Top" Width="36" Source="ms-appx:///Assets/Arm.png"/>
+
+                        <Rectangle Grid.Row="1" Grid.Column="1" Margin="0,0,0,0" Stroke="Transparent"  VerticalAlignment="Center" Width="250" Height="250">
+                            <Rectangle.Fill>
+                                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                    <LinearGradientBrush.RelativeTransform>
+                                        <CompositeTransform CenterY="0.5" CenterX="0.5" Rotation="-9.462"/>
+                                    </LinearGradientBrush.RelativeTransform>
+                                    <GradientStop Color="#7F1E1A46" Offset="0.235"/>
+                                    <GradientStop Color="#7F0B0A0C" Offset="0.791"/>
+                                    <GradientStop Color="#7F1F1489" Offset="0.478"/>
+                                </LinearGradientBrush>
+                            </Rectangle.Fill>
+                        </Rectangle>
+
+                        <c:Dial x:Name="Dial" Grid.Column="1" Grid.Row="1" Height="200" Width="200" Minimum="0" Maximum="270.0" >
+                            <c:Dial.Knob>
+                                <Grid>
+                                    <Ellipse Stroke="White" StrokeThickness="1" >
+                                        <Ellipse.Fill>
+                                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                                <LinearGradientBrush.RelativeTransform>
+                                                    <CompositeTransform CenterY="0.5" CenterX="0.5" Rotation="30"/>
+                                                </LinearGradientBrush.RelativeTransform>
+                                                <GradientStop Color="#CC000000" Offset="0.394"/>
+                                                <GradientStop Color="#5BFFFFFF" Offset="0.997"/>
+                                            </LinearGradientBrush>
+                                        </Ellipse.Fill>
+                                    </Ellipse>
+                                    <Rectangle Height="15" Width="30" Margin="0,-10,180,0" RadiusX="20" RadiusY="20">
+                                        <Rectangle.Fill>
+                                            <ImageBrush Stretch="Fill" ImageSource="ms-appx:///Assets/Arrow.png">
+                                                <ImageBrush.RelativeTransform>
+                                                    <CompositeTransform CenterY="0.5" CenterX="0.5" Rotation="-90"/>
+                                                </ImageBrush.RelativeTransform>
+                                            </ImageBrush>
+                                        </Rectangle.Fill>
+                                    </Rectangle>
+                                </Grid>
+                            </c:Dial.Knob>
+                        </c:Dial>
+
+                        <Slider Grid.Column="1" Grid.Row="2"/>
+                        
                     </Grid>
                 </DataTemplate>
             </HubSection>
@@ -216,8 +273,7 @@
                         <Image x:Name="image" Grid.Column="1" HorizontalAlignment="Left" Height="36" Margin="17,5,0,0" VerticalAlignment="Top" Width="36" Source="ms-appx:///Assets/clipboard65.png"/>
 
                         <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Visible" MaxHeight="335" Background="#7A3A3434" Margin="0,25,3,15">
-                            <RichTextBlock x:Name="cLogView"  HorizontalAlignment="Center" VerticalAlignment="Top" Width="300" Margin="10,15,10,15" >
-                            </RichTextBlock>
+                            <RichTextBlock x:Name="cLogView"  HorizontalAlignment="Center" VerticalAlignment="Top" Width="300" Margin="10,15,10,15" />
                         </ScrollViewer>
 
                         <!-- <TextBlock x:Name="cLogView"  HorizontalAlignment="Center" Height="335" MaxHeight="335"  VerticalAlignment="Center" Width="300" Margin="10,20,10,18"  

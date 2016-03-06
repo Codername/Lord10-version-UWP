@@ -404,8 +404,6 @@ namespace Lord10
         {
             if (event_log != null)
             {
-                this.event_log_color(Colors.DarkGreen);
-
                 Paragraph Login = new Paragraph();
                 Run run = new Run();
                 run.Foreground = new SolidColorBrush(Windows.UI.Colors.Yellow);
@@ -423,7 +421,6 @@ namespace Lord10
                 Login.Inlines.Add(Complemento);
 
                 this.event_log(Login);
-
             }
 
 
@@ -619,6 +616,20 @@ namespace Lord10
                
             }
         }
+
+         public bool isEventAtrib()
+        {
+            if (this.event_log == null)
+            { 
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+
+        }
+
         
         
 

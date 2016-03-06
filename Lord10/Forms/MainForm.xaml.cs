@@ -50,7 +50,9 @@ namespace Lord10.Forms
             //// Set de variáveis globais e privates
 
             this.DataContext = view;
-            ((App)Application.Current).LAG.event_log += displayLog;
+            if(!(((App)Application.Current).LAG.isEventAtrib() == true))
+                        ((App)Application.Current).LAG.event_log += displayLog;
+
             ((App)Application.Current).LAG.event_log_color += displaycolorLog;
             _LAG = ((App)Application.Current).LAG;
 
@@ -105,7 +107,7 @@ namespace Lord10.Forms
         private void displayLog(Paragraph msg)
         {
             //           view.log += msg;
-            RichTextBlock log = (sysutils.FindVisualChildlog<RichTextBlock>(MainHub, "cLogView") as RichTextBlock);
+            RichTextBlock log = (sysutils.FindVisualChildlog<RichTextBlock>( MainDisp, "cLogView") as RichTextBlock);
             log.Blocks.Add(msg);
         }
 
@@ -306,7 +308,10 @@ namespace Lord10.Forms
             }
         }
 
-
+        private void MainDisp_Unloaded(object sender, RoutedEventArgs e)
+        {
+            ((App)Application.Current).LAG.event_log -= displayLog;
+        }
     }
    }
      
