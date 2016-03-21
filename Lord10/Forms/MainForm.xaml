@@ -5,7 +5,6 @@
     xmlns:c="using:Lord10.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:CircularSlider="using:Lord10.Controls.CircularSlider" x:Name="MainDisp"
     x:Class="Lord10.Forms.MainForm"
     mc:Ignorable="d" Unloaded="MainDisp_Unloaded">
 
@@ -84,7 +83,7 @@
                                 <ImageBrush Stretch="Uniform" ImageSource="ms-appx:///Assets/Stop.png"/>
                             </Button.Background>
                         </Button>
-                        <Button x:Name="ButtonFront" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center"  VerticalAlignment="Center" Height="40"  Width="200" Margin="0,-190,0,0"  Foreground="White" BorderThickness="1" BorderBrush="#FFFFFFFF" >
+                        <Button x:Name="ButtonFront" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center"  VerticalAlignment="Center" Height="40"  Width="200" Margin="0,-190,0,0"  Foreground="White" BorderThickness="1" BorderBrush="#FFFFFFFF" Click="ButtonFront_Click" >
                             <Image Source="ms-appx:///Assets/Arrow.png" Stretch="Fill" />
                         </Button>
                         <Button x:Name="ButtonRear" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center"  VerticalAlignment="Center" Height="40"  Width="200" Margin="0,190,0,0"  Foreground="White" BorderThickness="1" BorderBrush="#FFFFFFFF" >
@@ -192,16 +191,21 @@
             </HubSection>
             <HubSection VerticalContentAlignment="Stretch" HorizontalAlignment="Stretch" Width="357">
                 <DataTemplate>
-                    <Grid x:Name="ArmControl" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="349">
+                    <Grid x:Name="ArmControl" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="355">
                         <Grid.RowDefinitions>
+                            
                             <RowDefinition Height="2*"/>
                             <RowDefinition Height="12*"/>
-                            <RowDefinition Height="3*"/>
+                            <RowDefinition Height="2*"/>
+                            <RowDefinition Height="2*"/>
                             <RowDefinition Height="*"/>
+
+
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="9*"/>
+                            <ColumnDefinition Width="2*"/>
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
 
@@ -222,7 +226,10 @@
                             </Rectangle.Fill>
                         </Rectangle>
 
-                        <c:Dial x:Name="Dial" Grid.Column="1" Grid.Row="1" Height="200" Width="200" Minimum="0" Maximum="270.0" >
+                        <c:Dial x:Name="Dial" Grid.Column="1" Grid.Row="1" Height="200" Width="200" Minimum="-150" Maximum="150"  Value="{Binding Position, Mode=TwoWay}" RenderTransformOrigin="0.5,0.5" >
+                            <c:Dial.RenderTransform>
+                                <CompositeTransform Rotation="90"/>
+                            </c:Dial.RenderTransform>
                             <c:Dial.Knob>
                                 <Grid>
                                     <Ellipse Stroke="White" StrokeThickness="1" >
@@ -231,7 +238,7 @@
                                                 <LinearGradientBrush.RelativeTransform>
                                                     <CompositeTransform CenterY="0.5" CenterX="0.5" Rotation="30"/>
                                                 </LinearGradientBrush.RelativeTransform>
-                                                <GradientStop Color="#CC000000" Offset="0.394"/>
+                                                <GradientStop Color="#A5000000" Offset="0.219"/>
                                                 <GradientStop Color="#5BFFFFFF" Offset="0.997"/>
                                             </LinearGradientBrush>
                                         </Ellipse.Fill>
@@ -248,15 +255,74 @@
                                 </Grid>
                             </c:Dial.Knob>
                         </c:Dial>
+                        <c:Gauge Grid.Column="1" Grid.Row="1" Height="170" Width="170" 
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Center"
+                            TickBrush="{x:Null}"
+                            ScaleTickBrush="#BF292C6C"
+                            NeedleBrush="Transparent"
+                            ValueBrush="Yellow"
+                            UnitBrush="Yellow"
+                            Value="0"
+                            Unit="Graus" Maximum="150" Minimum="-150" >
+                            <c:Gauge.ScaleBrush>
+                                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                    <LinearGradientBrush.RelativeTransform>
+                                        <CompositeTransform CenterY="0.5" CenterX="0.5" Rotation="-315"/>
+                                    </LinearGradientBrush.RelativeTransform>
+                                    <GradientStop Color="#FFFFDC00" Offset="0"/>
+                                    <GradientStop Color="#FFFF0808" Offset="1"/>
+                                </LinearGradientBrush>
+                            </c:Gauge.ScaleBrush>
+                            <c:Gauge.TrailBrush>
+                                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                    <LinearGradientBrush.RelativeTransform>
+                                        <CompositeTransform CenterY="0.5" CenterX="0.5" Rotation="-405"/>
+                                    </LinearGradientBrush.RelativeTransform>
+                                    <GradientStop Color="#7F7174C7" Offset="0"/>
+                                    <GradientStop Color="#CC020AB8" Offset="1"/>
+                                </LinearGradientBrush>
+                            </c:Gauge.TrailBrush>
+                        </c:Gauge>
 
-                        <Slider Grid.Column="1" Grid.Row="2"/>
-                        
+                        <Slider Grid.Column="1" Grid.Row="2" Maximum="150" Minimum="-150" SmallChange="2" TickFrequency="15" StepFrequency="2" VerticalAlignment="Top" Grid.RowSpan="1"
+                                Value="{Binding Position, Mode=TwoWay}"/>
+
+                        <Button  x:Name="cButtonPositionArm"  Content="Posicionar" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Left" Width="91" Margin="10,10,0,0" VerticalAlignment="Top" Background="#33060606" Grid.RowSpan="1" Foreground="White" BorderThickness="1" BorderBrush="#FFFFFFFF"/>
+
+                        <ProgressBar x:Name="BarY" Grid.Row="1" RenderTransformOrigin="0.5,0.5" Width="326" HorizontalAlignment="Left" Margin="127.762,185.302,-427.846,180.218" UseLayoutRounding="False" d:LayoutRounding="Auto" Height="14.48"
+                                     Value="{Binding Position, Mode=TwoWay}" >
+                            <ProgressBar.RenderTransform>
+                                <CompositeTransform Rotation="-90"/>
+                            </ProgressBar.RenderTransform>
+                        </ProgressBar>
+
+                        <Slider x:Name="EixoY"  Grid.Column="2" Grid.Row="1" Maximum="150" Minimum="-150" SmallChange="2" TickFrequency="15" StepFrequency="2" 
+                                HorizontalAlignment="Right"
+                                Value="{Binding Position, Mode=TwoWay}" Orientation="Vertical" BorderThickness="0,50" Margin="0,34.667,0,35.333" Width="36"/>
+
                     </Grid>
                 </DataTemplate>
             </HubSection>
-            <HubSection Header="HubSection 2">
+            <HubSection VerticalContentAlignment="Stretch" HorizontalAlignment="Stretch" Width="357">
                 <DataTemplate>
-                    <Grid/>
+                    <Grid x:Name="SensorControl" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="349">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="2*"/>
+                            <RowDefinition Height="12*"/>
+                            <RowDefinition Height="3*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="9*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Rectangle Grid.ColumnSpan="3" HorizontalAlignment="Left" Height="48" Margin="12,0,0,0" Stroke="Transparent" VerticalAlignment="Top" Width="305" Fill="#3F000000"/>
+                        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Transdutores" VerticalAlignment="Top" Grid.ColumnSpan="3" Width="290" Grid.Column="1" Margin="58,6,0,0" Foreground="White" FontSize="24"/>
+                        <Image x:Name="image" Grid.Column="1" HorizontalAlignment="Left" Height="36" Margin=" 8,4,0,0" VerticalAlignment="Top" Width="36" Source="ms-appx:///Assets/Sensor 110.png"/>
+                    </Grid>
                 </DataTemplate>
             </HubSection>
             <HubSection x:Name="HubLog" VerticalContentAlignment="Stretch">

@@ -96,12 +96,8 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\CircularSliderControl\CircularSliderControl.cs" />
-    <Compile Include="Controls\CircularSliderControl\IGeometryHelper.cs" />
-    <Compile Include="Controls\CircularSliderControl\IMathHelper.cs" />
-    <Compile Include="Controls\CircularSliderControl\PadMinutesConverter.cs" />
-    <Compile Include="Controls\CircularSliderControl\PercentageConverter.cs" />
     <Compile Include="Controls\Dial.cs" />
+    <Compile Include="Controls\Gauge.cs" />
     <Compile Include="Controls\NavMenuListView.cs" />
     <Compile Include="Controls\PageHeader.xaml.cs">
       <DependentUpon>PageHeader.xaml</DependentUpon>
@@ -161,6 +157,7 @@
     <Content Include="Assets\Logo App About.png" />
     <Content Include="Assets\Result 4 Smal.png" />
     <Content Include="Assets\Result 4.png" />
+    <Content Include="Assets\Sensor 110.png" />
     <Content Include="Assets\SplashII.png" />
     <Content Include="Assets\Stop.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

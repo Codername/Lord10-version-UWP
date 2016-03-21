@@ -31,7 +31,7 @@
 
             <ToggleSwitch x:Name="cCheckIPFlag" Grid.Row="3"  OnContent="Robô Flag Habilitado" OffContent="Robô Flag Desabilitado"  HorizontalAlignment="Left" Margin="15,0,0,0" VerticalAlignment="Center"  RequestedTheme="Dark" Toggled="cCheckIPFlag_Toggled_1" />
             <ToggleSwitch x:Name="cCheckIPLag" Grid.Row="1" OnContent="Robô Lag Habilitado" OffContent="Robô Lag Desabilitado" HorizontalAlignment="Left" Margin="15,0,0,0" VerticalAlignment="Center"  RequestedTheme="Dark" Toggled="cCheckIPLag_Toggled" />
-            </Grid>
+        </Grid>
         <c:PageHeader x:Name="pageHeader">
             <c:PageHeader.HeaderContent>
                 <TextBlock x:Name="title" Style="{ThemeResource PageTitleTextBlockStyle}" Text="Configurações..."/>

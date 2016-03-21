@@ -37,6 +37,17 @@ namespace Lord10.Forms
                 this.OnPropertyChanged("Cor");
             }
         }
+        public double _Position;
+        public double Position
+        {
+            get { return this._Position; }
+
+            set
+            {
+                this._Position = value;
+                this.OnPropertyChanged("Position");
+            }
+        }
 
         protected virtual void OnPropertyChanged(string propertyName)
         {

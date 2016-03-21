@@ -72,8 +72,8 @@ namespace Lord10.Forms
             Display_Animation_Button(); // Chamar Rotina para atualizar fundo de Botoes
             AppBarDisconect.Visibility = Visibility.Visible;
 
-
-
+            _LAG.OnReceive(); // metodo Looping de entrada ip;
+            
 
                       
             
@@ -107,7 +107,7 @@ namespace Lord10.Forms
         private void displayLog(Paragraph msg)
         {
             //           view.log += msg;
-            RichTextBlock log = (sysutils.FindVisualChildlog<RichTextBlock>( MainDisp, "cLogView") as RichTextBlock);
+            RichTextBlock log = (sysutils.FindVisualChildlog<RichTextBlock>( MainHub, "cLogView") as RichTextBlock);
             log.Blocks.Add(msg);
         }
 
@@ -169,12 +169,19 @@ namespace Lord10.Forms
 
         private void AppBarDisconect_Click(object sender, RoutedEventArgs e)
         {
+
             Button sbF = (sysutils.FindVisualChild<Button>(MainHub, "cButtonLAG") as Button);
             sbF.Background = new SolidColorBrush(Color.FromArgb(0x33,0x06,0x06,0x06));
             spinButton.Stop();
             AppBarDisconect.Visibility = Visibility.Collapsed;
             Storyboard sbL = (sysutils.FindVisualChild<Button>(MainHub, "cButtonLAG") as Button).Resources["StoryboardOnLag"] as Storyboard;
             sbL.Stop();
+
+            if (_LAG.IsConnected == generics.connect.conected)
+            {
+                _LAG.disConect();
+            }
+
         }
 
         private async void Salvar_Click(object sender, RoutedEventArgs e)
@@ -304,13 +311,22 @@ namespace Lord10.Forms
         {
             if(_LAG.IsConnected == generics.connect.conected)
             {
-                moveRobot(generics.singleMovement.stop, "Stop A & B Motors");
+                moveRobot(generics.singleMovement.stop, " Stop A & B Motors");
             }
         }
 
         private void MainDisp_Unloaded(object sender, RoutedEventArgs e)
         {
             ((App)Application.Current).LAG.event_log -= displayLog;
+        }
+
+        private void ButtonFront_Click(object sender, RoutedEventArgs e)
+        {
+            if (_LAG.IsConnected == generics.connect.conected)
+            {
+                moveRobot(generics.singleMovement.forward, " Foward all Motors");
+            }
+
         }
     }
    }

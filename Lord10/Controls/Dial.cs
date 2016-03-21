@@ -25,7 +25,7 @@ namespace Lord10.Controls
 
         public static readonly DependencyProperty ValueProperty =
         DependencyProperty.Register("Value", typeof(double),
-        typeof(Dial), null);
+        typeof(Dial), new PropertyMetadata(0.0, OnValueChanged));
 
         public static readonly DependencyProperty MinimumProperty =
         DependencyProperty.Register("Minimum", typeof(double),
@@ -42,7 +42,7 @@ namespace Lord10.Controls
         public static readonly DependencyProperty FaceProperty =
         DependencyProperty.Register("Face", typeof(UIElement),
         typeof(Dial), null);
-
+                
         public double Value
         {
             get { return (double)GetValue(ValueProperty); }
@@ -116,6 +116,19 @@ namespace Lord10.Controls
             value.Angle = rotation;
             Value = rotation;
         }
+
+
+        private static void OnValueChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            var c = (Dial)d;
+            if (Double.IsNaN(c.Value))
+                return;
+            Double newValue = (Double)e.NewValue;
+            c.setPosition(newValue);
+            c.OnApplyTemplate();
+        }
+
+
 
         protected override void OnApplyTemplate()
         {

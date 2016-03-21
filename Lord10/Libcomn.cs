@@ -18,6 +18,7 @@ using Windows.UI.Xaml.Documents;
 using System.IO;
 using Lord10.DataTypes;
 using Windows.Foundation;
+using Windows.ApplicationModel.Background;
 
 namespace Lord10
 {
@@ -363,6 +364,7 @@ namespace Lord10
         /// </summary>
 
         private const string PortComm = "1020";   // Porta para comunicação
+        private const string _backgroundTaskName = "Socket Background Task"; // Nome do Socket Activity Triger
 
         private StreamSocket LocalSok; // Socket de Comunicação
         private HostName IpScocket; // Ip de comunicação
@@ -441,21 +443,52 @@ namespace Lord10
                 await LocalSok.ConnectAsync(IpScocket, PortComm);
                 streamOut = LocalSok.OutputStream.AsStreamForWrite();
                 StreamWriter writer = new StreamWriter(streamOut);
-                string outmsg = "handshake";
-
+                streamIn = LocalSok.InputStream.AsStreamForRead();
+                StreamReader reader = new StreamReader(streamIn);
+                string outmsg = "handshake\n";
                 await writer.WriteLineAsync(outmsg);
                 await writer.FlushAsync();
 
                 //Espera dados do mindstorms ...
-                streamIn = LocalSok.InputStream.AsStreamForRead();
-                StreamReader reader = new StreamReader(streamIn);
+              
                 string response = await reader.ReadLineAsync();
+                
                 if (response == "MINDSTORMS")
                 {
                     // Aponta o Delegate para listener(escuta) do socket
-                    StreamSocketListener socketListener = new StreamSocketListener();
-                    socketListener.ConnectionReceived += SocketListener_ConnectionReceived;
+                    
                     _isconected = generics.connect.conected;
+
+                    Paragraph Login = new Paragraph();
+                    Run run = new Run();
+                    run = sysutils.printRunRTF("Received " + textmsg, Colors.Lime, 1);
+                    Run hand = new Run();
+                    hand = sysutils.printRunRTF(" handshake", Colors.White, 1);
+                    Run Complemento = new Run();
+                    DateTime Hoje = DateTime.Now;
+                    Complemento = sysutils.printRunRTF( " as " + Hoje.ToString("T")+"\n", Colors.White, 0);
+
+                    Login.Inlines.Add(run);
+                    Login.Inlines.Add(hand);
+                    Login.Inlines.Add(Complemento);
+
+                    this.event_log(Login);
+
+                    /// Scket Activity Trigger
+                    /// 
+
+            /*        var socketTaskBuilder = new BackgroundTaskBuilder();
+                    socketTaskBuilder.Name = _backgroundTaskName;
+                    socketTaskBuilder.TaskEntryPoint = _backgroundTaskEntryPoint;
+                    var trigger = new SocketActivityTrigger();
+                    socketTaskBuilder.SetTrigger(trigger);
+                    _task = socketTaskBuilder.Register(); */
+
+
+
+                    //                    StreamSocketListener socketListener = new StreamSocketListener();
+                    //                    socketListener.ConnectionReceived += SocketListener_ConnectionReceived;
+                    //                    await socketListener.BindServiceNameAsync(PortComm);
                 }
 
             }
@@ -491,26 +524,78 @@ namespace Lord10
             return 0; 
         }
    
-        
+        public async Task<int> OnReceive()
+        {
+            StreamReader reader = new StreamReader(LocalSok.InputStream.AsStreamForRead());
+            while (_isconected == generics.connect.conected )
+            {
+
+                string response = await reader.ReadLineAsync();
+                if (response != null)
+                {
+                    Paragraph Login = new Paragraph();
+                    Run run = new Run();
+                    run = sysutils.printRunRTF("Received " + textmsg, Colors.Lime, 1);
+                    Run Complemento = new Run();
+                    DateTime Hoje = DateTime.Now;
+                    Complemento = sysutils.printRunRTF((response + " as " + Hoje.ToString("T") + "\n"), Colors.White, 0);
+
+                    Login.Inlines.Add(run);
+                    Login.Inlines.Add(Complemento);
+
+                    event_log(Login);
+                }
+            }
+            return 0;
+        }
+
+        public void disConect()
+        {
+            if (_isconected == generics.connect.conected)
+            {
+                _send("CLOSE\n");
+                LocalSok.Dispose();
+
+                Run run = new Run();
+                run = sysutils.printRunRTF(textmsg, Colors.Red, 1);
+
+                Run Complemento = new Run();
+                Complemento = sysutils.printRunRTF(" CLOSED ", Colors.White, 1);
+
+                Run Compl2 = new Run();
+                ///// Histórico de Evento  
+                DateTime Hoje = DateTime.Now;
+                Compl2 = sysutils.printRunRTF(("as " + Hoje.ToString("T") + " " + Hoje.ToString("d") + "\n"), Colors.White, 0);
+
+                Paragraph Closemsg = new Paragraph();
+
+                Closemsg.Inlines.Add(run);
+                Closemsg.Inlines.Add(Complemento);
+                Closemsg.Inlines.Add(Compl2);
+                this.event_log(Closemsg);
+                _isconected = generics.connect.idle;
+
+            }
+        }
 
         public void genericMove(generics.singleMovement mov )
         {
                switch (mov){
 
                 case generics.singleMovement.stop:
-                                                     _send("AB_STOP");
+                                                     _send("AB_STOP\n");
                                                      break;
                 case generics.singleMovement.forward:
-                                                     _send("AB_ROTATE");
+                                                     _send("AB_ROTATE\n");
                                                      break;
                 case generics.singleMovement.rear:
-                                                     _send("AB_INVERSE ROTATE");
+                                                     _send("AB_INVERSE ROTATE\n");
                                                      break;
                 case generics.singleMovement.left:
-                                                     _send("B_ALTERNATE");
+                                                     _send("B_ALTERNATE\n");
                                                      break;
                 case generics.singleMovement.right:
-                                                     _send("A_ALTERNATE");
+                                                     _send("A_ALTERNATE\n");
                                                      break;
             }
         }
